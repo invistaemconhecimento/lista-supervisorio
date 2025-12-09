@@ -1,197 +1,189 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Equipamentos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Segoe UI', Tahoma, Geneva, Verdana,sans-serif; background:linear-gradient(135deg,#f5f7fa,#c3cfe2); min-height:100vh; padding:20px; }
-        .container { max-width:1200px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controle de Equipamentos</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI', Tahoma, Geneva, Verdana,sans-serif; background:linear-gradient(135deg,#f5f7fa,#c3cfe2); min-height:100vh; padding:20px; }
+.container { max-width:1200px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
 
-        header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; }
-        header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px; }
-        .filtros { display:flex; gap:15px; max-width:800px; margin:0 auto 20px; }
-        #searchInput,#filterCategory { flex:1; padding:12px 20px; border:none; border-radius:8px; font-size:1rem; background:rgba(255,255,255,0.9); }
-        .stats { font-size:1.1rem; opacity:0.9; }
+header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; }
+header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px; }
+.filtros { display:flex; gap:15px; max-width:800px; margin:0 auto 20px; }
+#searchInput,#filterCategory { flex:1; padding:12px 20px; border:none; border-radius:8px; font-size:1rem; background:rgba(255,255,255,0.9); }
+.stats { font-size:1.1rem; opacity:0.9; }
 
-        main { padding:30px; }
-        .equipamentos-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(350px,1fr)); gap:25px; }
+main { padding:30px; }
+.equipamentos-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(350px,1fr)); gap:25px; }
 
-        .equipamento-card { background:white; border-radius:10px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; transition:transform 0.3s ease,box-shadow 0.3s ease; display:flex; flex-direction:column; }
-        .equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
+.equipamento-card { background:white; border-radius:10px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; transition:transform 0.3s ease,box-shadow 0.3s ease; display:flex; flex-direction:column; }
+.equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
 
-        .equipamento-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; }
-        .tag { background:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:0.9rem; }
-        .id-badge { display:none; } /* sem id */
+.equipamento-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; }
+.tag { background:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:0.9rem; }
 
-        .equipamento-info { margin-top:15px; flex:1; }
-        .info-item { display:flex; align-items:flex-start; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #eee; }
-        .info-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
-        .info-label { font-weight:600; color:#2c3e50; min-width:120px; display:flex; align-items:center; gap:8px; }
-        .info-value { color:#34495e; flex:1; }
+.equipamento-info { margin-top:15px; flex:1; }
+.info-item { display:flex; align-items:flex-start; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #eee; }
+.info-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.info-label { font-weight:600; color:#2c3e50; min-width:120px; display:flex; align-items:center; gap:8px; }
+.info-value { color:#34495e; flex:1; }
 
-        #btnFlutuanteTopo {
-            position:fixed;
-            bottom:25px;
-            right:25px;
-            width:55px;
-            height:55px;
-            border-radius:50%;
-            border:none;
-            background:#2c3e50;
-            color:white;
-            font-size:22px;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            box-shadow:0 4px 12px rgba(0,0,0,0.3);
-            transition:0.3s ease, opacity 0.3s ease;
-            opacity:0;
-            pointer-events:none;
-        }
-        #btnFlutuanteTopo.show { opacity:1; pointer-events:auto; }
-        #btnFlutuanteTopo:hover { background:#1f2e3b; transform:scale(1.1); }
+#btnFlutuanteTopo {
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:none;
+    background:#2c3e50;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    transition:0.3s ease, opacity 0.3s ease;
+    opacity:0;
+    pointer-events:none;
+}
+#btnFlutuanteTopo.show { opacity:1; pointer-events:auto; }
+#btnFlutuanteTopo:hover { background:#1f2e3b; transform:scale(1.1); }
 
-        .indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
-        .indice-container h2 { margin-bottom:10px; color:#2c3e50; }
-        #indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 5px; }
-        #indiceEquipamentos li { margin:2px 0; }
-        #indiceEquipamentos li a { background:#3498db; color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:.9rem; transition:.2s; }
-        #indiceEquipamentos li a:hover { background:#2978b8; }
+.indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
+.indice-container h2 { margin-bottom:10px; color:#2c3e50; }
+#indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:5px 10px; }
+#indiceEquipamentos li { margin:2px 0; }
+#indiceEquipamentos li a { background:#3498db; color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:.9rem; transition:.2s; }
+#indiceEquipamentos li a:hover { background:#2978b8; }
 
-        html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; }
 
-        @media(max-width:768px) {
-            .equipamentos-container { grid-template-columns:1fr; }
-            .filtros { flex-direction:column; }
-            header h1 { font-size:2rem; }
-        }
+footer { background:#2c3e50; color:white; text-align:center; padding:20px; margin-top:30px; }
 
-        .no-results { grid-column:1/-1; text-align:center; padding:40px; color:#7f8c8d; font-size:1.2rem; }
-        .error { grid-column:1/-1; text-align:center; padding:40px; color:#e74c3c; font-size:1.2rem; }
-    </style>
+.no-results { grid-column:1/-1; text-align:center; padding:40px; color:#7f8c8d; font-size:1.2rem; }
+.error { grid-column:1/-1; text-align:center; padding:40px; color:#e74c3c; font-size:1.2rem; }
+
+@media(max-width:768px){
+    .equipamentos-container { grid-template-columns:1fr; }
+    .filtros { flex-direction:column; }
+    header h1 { font-size:2rem; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
-            <div class="filtros">
-                <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
-                <select id="filterCategory">
-                    <option value="">Todas Categorias</option>
-                </select>
-            </div>
-            <div class="stats">
-                <span id="totalEquipamentos">0 equipamentos</span>
-            </div>
-        </header>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
+        <div class="filtros">
+            <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
+            <select id="filterCategory"><option value="">Todas Categorias</option></select>
+        </div>
+        <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
+    </header>
 
-        <nav class="indice-container" id="topo-indice">
-            <h2>Índice de Equipamentos</h2>
-            <ul id="indiceEquipamentos"></ul>
-        </nav>
+    <nav class="indice-container" id="topo-indice">
+        <h2>Índice de Equipamentos</h2>
+        <ul id="indiceEquipamentos"></ul>
+    </nav>
 
-        <main>
-            <div class="equipamentos-container" id="equipamentosContainer">
-                <!-- Equipamentos carregados via JS -->
-            </div>
-        </main>
+    <main>
+        <div class="equipamentos-container" id="equipamentosContainer"></div>
+    </main>
 
-        <footer>
-            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
-        </footer>
-    </div>
+    <footer>
+        <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
+    </footer>
+</div>
 
-    <button id="btnFlutuanteTopo" title="Voltar ao índice"><i class="fas fa-arrow-up"></i></button>
+<button id="btnFlutuanteTopo" title="Voltar ao índice"><i class="fas fa-arrow-up"></i></button>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            try {
-                const response = await fetch('lista.json');
-                const equipamentos = await response.json();
+    try {
+        const response = await fetch('lista.json');
+        const equipamentos = await response.json();
 
-                gerarIndice(equipamentos);
-                preencherCategorias(equipamentos);
-                exibirEquipamentos(equipamentos);
+        atualizarIndice(equipamentos);
+        preencherCategorias(equipamentos);
+        exibirEquipamentos(equipamentos);
 
-                document.getElementById('searchInput').addEventListener('input', () => filtrarEquipamentos(equipamentos));
-                document.getElementById('filterCategory').addEventListener('change', () => filtrarEquipamentos(equipamentos));
+        document.getElementById('searchInput').addEventListener('input', () => filtrar(equipamentos));
+        document.getElementById('filterCategory').addEventListener('change', () => filtrar(equipamentos));
 
-                const botao = document.getElementById("btnFlutuanteTopo");
-                botao.addEventListener("click", () => {
-                    document.getElementById('topo-indice').scrollIntoView({ behavior: 'smooth' });
-                });
-
-                window.addEventListener('scroll', () => {
-                    if(window.scrollY > 200){ botao.classList.add('show'); } 
-                    else { botao.classList.remove('show'); }
-                });
-
-            } catch (err) {
-                console.error("Erro ao carregar JSON:", err);
-                document.getElementById('equipamentosContainer').innerHTML = '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
-            }
+        const botaoTopo = document.getElementById("btnFlutuanteTopo");
+        botaoTopo.addEventListener("click", () => {
+            document.getElementById('topo-indice').scrollIntoView({behavior:'smooth'});
         });
 
-        function preencherCategorias(equipamentos){
-            const select = document.getElementById('filterCategory');
-            const categorias = [...new Set(equipamentos.map(e => e.categoria))].sort();
-            categorias.forEach(c => { const option = document.createElement('option'); option.value=c; option.textContent=c; select.appendChild(option); });
-        }
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 200){ botaoTopo.classList.add('show'); } 
+            else { botaoTopo.classList.remove('show'); }
+        });
 
-        function gerarIndice(equipamentos){
-            const indice = document.getElementById('indiceEquipamentos'); indice.innerHTML='';
-            equipamentos.forEach(e => {
-                const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="#${tagID}">${e.tag}</a>`;
-                indice.appendChild(li);
-            });
-        }
+    } catch (err) {
+        console.error("Erro ao carregar JSON:", err);
+        document.getElementById('equipamentosContainer').innerHTML = '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
+    }
+});
 
-        function exibirEquipamentos(equipamentos){
-            const container = document.getElementById('equipamentosContainer'); container.innerHTML='';
-            if(equipamentos.length === 0){ container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; return; }
-            equipamentos.forEach(e => container.appendChild(criarCardEquipamento(e)));
-        }
+function preencherCategorias(equipamentos){
+    const select = document.getElementById('filterCategory');
+    const categorias = [...new Set(equipamentos.map(e => e.categoria))].sort();
+    categorias.forEach(c => { const option=document.createElement('option'); option.value=c; option.textContent=c; select.appendChild(option); });
+}
 
-        function criarCardEquipamento(equip){
-            const card = document.createElement('div'); 
-            card.className='equipamento-card'; 
-            card.id = `equip-${equip.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
-            const icons = { local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left' };
-            card.innerHTML = `
-                <div class="equipamento-header">
-                    <span class="tag">${equip.tag}</span>
-                </div>
-                <div class="equipamento-info">
-                    <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${equip.local}</span></div>
-                    <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${equip.categoria}</span></div>
-                    <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${equip.tela}</span></div>
-                    <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${equip.entrada}</span></div>
-                    <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${equip.saída}</span></div>
-                </div>
-            `;
-            return card;
-        }
+function atualizarIndice(equipamentos){
+    const indice = document.getElementById('indiceEquipamentos');
+    indice.innerHTML = '';
+    equipamentos.forEach(e => {
+        const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${tagID}">${e.tag}</a>`;
+        indice.appendChild(li);
+    });
+}
 
-        function filtrarEquipamentos(equipamentos){
-            const termo = document.getElementById('searchInput').value.toLowerCase();
-            const categoria = document.getElementById('filterCategory').value;
-            const filtrados = equipamentos.filter(e => 
-                (e.tag.toLowerCase().includes(termo) ||
-                e.local.toLowerCase().includes(termo) ||
-                e.categoria.toLowerCase().includes(termo) ||
-                e.tela.toLowerCase().includes(termo)) &&
-                (!categoria || e.categoria === categoria)
-            );
-            exibirEquipamentos(filtrados);
-        }
-    </script>
+function exibirEquipamentos(equipamentos){
+    const container = document.getElementById('equipamentosContainer'); container.innerHTML='';
+    if(equipamentos.length === 0){ container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; return; }
+    equipamentos.forEach(e => container.appendChild(criarCard(e)));
+}
+
+function criarCard(e){
+    const card=document.createElement('div');
+    card.className='equipamento-card';
+    card.id=`equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
+    const icons={local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left'};
+    card.innerHTML=`
+        <div class="equipamento-header"><span class="tag">${e.tag}</span></div>
+        <div class="equipamento-info">
+            <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${e.categoria}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${e.entrada}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${e.saída}</span></div>
+        </div>
+    `;
+    return card;
+}
+
+function filtrar(equipamentos){
+    const termo = document.getElementById('searchInput').value.toLowerCase();
+    const cat = document.getElementById('filterCategory').value;
+    const filtrados = equipamentos.filter(e => 
+        (e.tag.toLowerCase().includes(termo) || e.local.toLowerCase().includes(termo) || e.categoria.toLowerCase().includes(termo) || e.tela.toLowerCase().includes(termo))
+        && (!cat || e.categoria===cat)
+    );
+    exibirEquipamentos(filtrados);
+    atualizarIndice(filtrados);
+}
+</script>
 </body>
 </html>
