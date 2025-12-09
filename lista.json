@@ -48,7 +48,7 @@
   { "id": 47, "tag": "4230-PU-029", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Rejeitos da Scavenger e da Rougher", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "HP-23", "saída": "TK-003" },
   { "id": 48, "tag": "4230-PU-029R", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Rejeitos da Scavenger e da Rougher", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "HP-23", "saída": "TK-003" },
   { "id": 49, "tag": "4230-PU-214", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Bomba de recirculação da Jameson 2", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "Jameson 2", "saída": "Jameson 2" },
-  { "id": 50, "tag": "4230-PU-214R", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Bomba de recirculação da Jameson 2", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "Jameson 2", "saída": "Jameson 2" }
+  { "id": 50, "tag": "4230-PU-214R", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Bomba de recirculação da Jameson 2", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "Jameson 2", "saída": "Jameson 2" },
   { "id": 51, "tag": "4160-PU-002", "local": "Moagem", "categoria": "Bomba de polpa", "descrição": "Bomba da ciclonagem de classificaçãol", "tela": "MOAGEM / MOAGEM", "entrada": "HP-003", "saída": "Ciclones" },
   { "id": 52, "tag": "4160-PU-002R", "local": "Moagem", "categoria": "Bomba de polpa", "descrição": "Bomba da ciclonagem de classificaçãol", "tela": "MOAGEM / MOAGEM", "entrada": "HP-003", "saída": "Ciclones" }
 ]
