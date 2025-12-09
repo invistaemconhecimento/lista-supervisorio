@@ -56,10 +56,11 @@ main { padding:30px; }
 
 .indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
 .indice-container h2 { margin-bottom:10px; color:#2c3e50; }
-#indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 15px; /* maior gap */ }
+#indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 15px; }
 #indiceEquipamentos li { margin:5px 0; }
 #indiceEquipamentos li a { background:#3498db; color:white; padding:8px 14px; border-radius:8px; text-decoration:none; font-size:.95rem; transition:.2s; }
 #indiceEquipamentos li a:hover { background:#2978b8; }
+#indiceEquipamentos li a.active { background:#e74c3c; }
 
 html { scroll-behavior:smooth; }
 
@@ -125,6 +126,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.addEventListener('scroll', () => {
             if(window.scrollY > 200){ botaoTopo.classList.add('show'); } 
             else { botaoTopo.classList.remove('show'); }
+
+            atualizarIndiceAtivo();
         });
 
     } catch (err) {
@@ -183,6 +186,23 @@ function filtrar(equipamentos){
     );
     exibirEquipamentos(filtrados);
     atualizarIndice(filtrados);
+}
+
+// Destaque automático da tag visível no índice
+function atualizarIndiceAtivo(){
+    const cards = document.querySelectorAll('.equipamento-card');
+    let indexAtivo = null;
+    cards.forEach((card,i) => {
+        const rect = card.getBoundingClientRect();
+        if(rect.top <= 150 && rect.bottom >= 150){ indexAtivo=i; }
+    });
+    const links = document.querySelectorAll('#indiceEquipamentos a');
+    links.forEach(l => l.classList.remove('active'));
+    if(indexAtivo !== null){
+        const tagID = cards[indexAtivo].id;
+        const linkAtivo = document.querySelector(`#indiceEquipamentos a[href="#${tagID}"]`);
+        if(linkAtivo) linkAtivo.classList.add('active');
+    }
 }
 </script>
 </body>
