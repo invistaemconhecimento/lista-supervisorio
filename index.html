@@ -3,41 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Equipamentos</title>
+    <title>Equipamentos - ERO Brasil Tucumã</title>
+
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/a2e0e9a66b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
-            <div class="filtros">
-                <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
-                <select id="filterCategory">
-                    <option value="">Todas Categorias</option>
-                </select>
-            </div>
-            <div class="stats">
-                <span id="totalEquipamentos">0 equipamentos</span>
-            </div>
-        </header>
 
-        <nav class="indice-container">
-        <h2>Índice de Equipamentos</h2>
-        <ul id="indiceEquipamentos"></ul>
-        </nav>
+<header>
+    <h1>Lista de Equipamentos</h1>
+</header>
 
-        <main>
-            <div class="equipamentos-container" id="equipamentosContainer">
-                <!-- Os equipamentos serão carregados aqui via JavaScript -->
-            </div>
-        </main>
+<!-- CONTAINER DO ÍNDICE -->
+<nav class="indice-container" id="topo-indice">
+    <h2>Índice de Equipamentos</h2>
+    <ul id="indiceEquipamentos"></ul>
+</nav>
 
-        <footer>
-            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
-        </footer>
-    </div>
+<main>
+    <section id="listaEquipamentos" class="lista-equipamentos"></section>
+</main>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
