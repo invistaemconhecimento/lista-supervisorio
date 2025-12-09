@@ -48,11 +48,8 @@
             align-items:center;
             justify-content:center;
             box-shadow:0 4px 12px rgba(0,0,0,0.3);
-            opacity:0;
-            pointer-events:none;
             transition:0.3s ease;
         }
-        #btnFlutuanteTopo.mostrar { opacity:1; pointer-events:all; }
         #btnFlutuanteTopo:hover { background:#1f2e3b; transform:scale(1.1); }
 
         .indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
@@ -122,11 +119,9 @@
                 document.getElementById('filterCategory').addEventListener('change', () => filtrarEquipamentos(equipamentos));
 
                 const botao = document.getElementById("btnFlutuanteTopo");
-                window.addEventListener("scroll", () => {
-                    if(window.scrollY > 250) botao.classList.add("mostrar");
-                    else botao.classList.remove("mostrar");
+                botao.addEventListener("click", () => {
+                    document.getElementById('topo-indice').scrollIntoView({ behavior: 'smooth' });
                 });
-                botao.addEventListener("click", () => window.location.hash = "topo-indice");
 
             } catch (err) {
                 console.error("Erro ao carregar JSON:", err);
