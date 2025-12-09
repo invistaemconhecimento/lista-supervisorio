@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "tag": "4250-PU-031",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
@@ -9,7 +8,6 @@
     "saída": "TK-006"
   },
   {
-    "id": 2,
     "tag": "4250-PU-031R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
@@ -18,7 +16,6 @@
     "saída": "TK-006"
   },
   {
-    "id": 3,
     "tag": "4260-PU-035",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
@@ -27,7 +24,6 @@
     "saída": "Filtro 1"
   },
   {
-    "id": 4,
     "tag": "4260-PU-035R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
@@ -36,7 +32,6 @@
     "saída": "Filtro 1"
   },
   {
-    "id": 5,
     "tag": "4260-PU-050",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
@@ -45,12 +40,43 @@
     "saída": "Filtro 1"
   },
   {
-    "id": 6,
     "tag": "4260-PU-050R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4260-TK-050",
     "saída": "Filtro 1"
+  },
+  {
+    "tag": "4260-PU-155",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4260-TK-050",
+    "saída": "Filtro 1"
+  },
+  {
+    "tag": "4260-PU-155R",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4260-TK-050",
+    "saída": "Filtro 1"
+  },
+  {
+    "tag": "4250-PU-030",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4250-TK-005",
+    "saída": "4250-TK-047"
+  },
+  {
+    "tag": "4250-PU-030R",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4250-TK-005",
+    "saída": "4250-TK-047"
   }
 ]
