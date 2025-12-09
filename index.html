@@ -23,7 +23,7 @@ header h1 img { max-height:50px; border-radius:5px; }
     margin:0 auto 10px; 
     transition: all 0.3s ease;
 }
-#searchInput, #filterCategory, #filterLocal, #filterTela {
+#searchInput, #filterCategory, #filterLocal, #filterTela, #filterEntrada, #filterSaida {
     padding:12px 20px; 
     border:none; 
     border-radius:8px; 
@@ -124,10 +124,12 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     <header>
         <h1><img src="logoERO.png" alt="Logo ERO"> Guia de Equipamentos</h1>
         <div class="filtros">
-            <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
+            <input type="text" id="searchInput" placeholder="Buscar por TAG, local, categoria, entrada ou saída...">
             <select id="filterCategory"><option value="">Todas Categorias</option></select>
             <select id="filterLocal"><option value="">Todos Locais</option></select>
             <select id="filterTela"><option value="">Todas Telas</option></select>
+            <select id="filterEntrada"><option value="">Todas Entradas</option></select>
+            <select id="filterSaida"><option value="">Todas Saídas</option></select>
         </div>
         <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
     </header>
@@ -164,6 +166,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('filterCategory').addEventListener('change', () => filtrar(equipamentos));
         document.getElementById('filterLocal').addEventListener('change', () => filtrar(equipamentos));
         document.getElementById('filterTela').addEventListener('change', () => filtrar(equipamentos));
+        document.getElementById('filterEntrada').addEventListener('change', () => filtrar(equipamentos));
+        document.getElementById('filterSaida').addEventListener('change', () => filtrar(equipamentos));
 
         const botaoTopo = document.getElementById("btnFlutuanteTopo");
         botaoTopo.addEventListener("click", () => {
@@ -187,17 +191,32 @@ function preencherFiltros(equipamentos){
     const selectCategoria = document.getElementById('filterCategory');
     const selectLocal = document.getElementById('filterLocal');
     const selectTela = document.getElementById('filterTela');
+    const selectEntrada = document.getElementById('filterEntrada');
+    const selectSaida = document.getElementById('filterSaida');
 
-    [...new Set(equipamentos.map(e => e.categoria))].sort().forEach(c => { 
-        const option = document.createElement('option'); option.value=c; option.textContent=c; selectCategoria.appendChild(option); 
+    // categorias
+    [...new Set(equipamentos.map(e => (e.categoria || '').trim()))].filter(Boolean).sort().forEach(c => {
+        const option = document.createElement('option'); option.value=c; option.textContent=c; selectCategoria.appendChild(option);
     });
 
-    [...new Set(equipamentos.map(e => e.local))].sort().forEach(l => { 
-        const option = document.createElement('option'); option.value=l; option.textContent=l; selectLocal.appendChild(option); 
+    // locais
+    [...new Set(equipamentos.map(e => (e.local || '').trim()))].filter(Boolean).sort().forEach(l => {
+        const option = document.createElement('option'); option.value=l; option.textContent=l; selectLocal.appendChild(option);
     });
 
-    [...new Set(equipamentos.map(e => e.tela))].sort().forEach(t => { 
-        const option = document.createElement('option'); option.value=t; option.textContent=t; selectTela.appendChild(option); 
+    // telas
+    [...new Set(equipamentos.map(e => (e.tela || '').trim()))].filter(Boolean).sort().forEach(t => {
+        const option = document.createElement('option'); option.value=t; option.textContent=t; selectTela.appendChild(option);
+    });
+
+    // entradas
+    [...new Set(equipamentos.map(e => ((e.entrada || '') + '').trim()))].filter(Boolean).sort().forEach(en => {
+        const option = document.createElement('option'); option.value=en; option.textContent=en; selectEntrada.appendChild(option);
+    });
+
+    // saídas
+    [...new Set(equipamentos.map(e => ((e['saída'] || '') + '').trim()))].filter(Boolean).sort().forEach(sa => {
+        const option = document.createElement('option'); option.value=sa; option.textContent=sa; selectSaida.appendChild(option);
     });
 }
 
@@ -207,7 +226,7 @@ function atualizarIndice(equipamentos){
     equipamentos.forEach(e => {
         const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#${tagID}" class="${e.tag.endsWith('R') ? 'reserva' : ''}">${e.tag}</a>`;
+        li.innerHTML = `<a href="#${tagID}" class="${String(e.tag).endsWith('R') ? 'reserva' : ''}">${e.tag}</a>`;
         indice.appendChild(li);
     });
 }
@@ -231,35 +250,52 @@ function exibirEquipamentos(equipamentos){
 function criarCard(e){
     const card = document.createElement('div');
     card.className = 'equipamento-card';
-    if(e.tag.endsWith('R')) card.classList.add('reserva');
-    card.id = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
+    if(String(e.tag).endsWith('R')) card.classList.add('reserva');
+    card.id = `equip-${String(e.tag).replace(/[^a-zA-Z0-9]/g,'')}`;
     const icons = {local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
+    // Use bracket notation for properties with accent
+    const descricao = e['descrição'] || e.descricao || '-';
+    const saida = e['saída'] || e.saida || '';
     card.innerHTML = `
         <div class="equipamento-header"><span class="tag">${e.tag}</span></div>
         <div class="equipamento-info">
-            <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${e.categoria}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.descricao}"></i> Descrição:</span><span class="info-value">${e.descrição || '-'}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${e.entrada}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${e.saída}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local || '-'}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${e.categoria || '-'}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.descricao}"></i> Descrição:</span><span class="info-value">${descricao}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela || '-'}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${e.entrada || '-'}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${saida || '-'}</span></div>
         </div>
     `;
     return card;
 }
 
 function filtrar(equipamentos){
-    const termo = document.getElementById('searchInput').value.toLowerCase();
+    const termo = document.getElementById('searchInput').value.toLowerCase().trim();
     const cat = document.getElementById('filterCategory').value;
     const local = document.getElementById('filterLocal').value;
     const tela = document.getElementById('filterTela').value;
+    const entradaFiltro = document.getElementById('filterEntrada').value;
+    const saidaFiltro = document.getElementById('filterSaida').value;
 
-    const filtrados = equipamentos.filter(e => 
-        (e.tag.toLowerCase().includes(termo) || e.local.toLowerCase().includes(termo) || e.categoria.toLowerCase().includes(termo) || e.tela.toLowerCase().includes(termo))
-        && (!cat || e.categoria===cat)
-        && (!local || e.local===local)
-        && (!tela || e.tela===tela)
-    );
+    const filtrados = equipamentos.filter(e => {
+        const tag = String(e.tag || '').toLowerCase();
+        const loc = String(e.local || '').toLowerCase();
+        const catE = String(e.categoria || '').toLowerCase();
+        const tel = String(e.tela || '').toLowerCase();
+        const ent = String(e.entrada || '').toLowerCase();
+        const sai = String(e['saída'] || e.saida || '').toLowerCase();
+
+        const termoMatch = !termo || tag.includes(termo) || loc.includes(termo) || catE.includes(termo) || tel.includes(termo) || ent.includes(termo) || sai.includes(termo);
+
+        return termoMatch
+            && (!cat || e.categoria === cat)
+            && (!local || e.local === local)
+            && (!tela || e.tela === tela)
+            && (!entradaFiltro || (e.entrada === entradaFiltro))
+            && (!saidaFiltro || ((e['saída'] || e.saida) === saidaFiltro));
+    });
+
     exibirEquipamentos(filtrados);
     atualizarIndice(filtrados);
 }
