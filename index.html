@@ -163,12 +163,13 @@ function criarCard(e){
     const card=document.createElement('div');
     card.className='equipamento-card';
     card.id=`equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
-    const icons={local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left'};
+    const icons={local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
     card.innerHTML=`
         <div class="equipamento-header"><span class="tag">${e.tag}</span></div>
         <div class="equipamento-info">
             <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${e.categoria}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.descricao}"></i> Descrição:</span><span class="info-value">${e.descrição || '-'}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${e.entrada}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${e.saída}</span></div>
