@@ -22,6 +22,9 @@ main { padding:30px; }
 .equipamento-card { background:white; border-radius:10px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; transition:transform 0.3s ease,box-shadow 0.3s ease; display:flex; flex-direction:column; }
 .equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
 
+/* Destaque para equipamentos reserva */
+.equipamento-card.reserva { border-left-color: #e67e22; background: #fff8f0; }
+
 .equipamento-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; }
 .tag { background:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:0.9rem; }
 
@@ -61,6 +64,9 @@ main { padding:30px; }
 #indiceEquipamentos li a { background:#3498db; color:white; padding:8px 14px; border-radius:8px; text-decoration:none; font-size:.95rem; transition:.2s; }
 #indiceEquipamentos li a:hover { background:#2978b8; }
 #indiceEquipamentos li a.active { background:#e74c3c; }
+/* Destaque para links reserva */
+#indiceEquipamentos a.reserva { background: #e67e22; }
+#indiceEquipamentos a.reserva:hover { background: #d35400; }
 
 html { scroll-behavior:smooth; }
 
@@ -148,7 +154,8 @@ function atualizarIndice(equipamentos){
     equipamentos.forEach(e => {
         const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#${tagID}">${e.tag}</a>`;
+        const isReserva = e.tag.endsWith('R') ? 'reserva' : '';
+        li.innerHTML = `<a href="#${tagID}" class="${isReserva}">${e.tag}</a>`;
         indice.appendChild(li);
     });
 }
@@ -160,11 +167,12 @@ function exibirEquipamentos(equipamentos){
 }
 
 function criarCard(e){
-    const card=document.createElement('div');
-    card.className='equipamento-card';
-    card.id=`equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
-    const icons={local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
-    card.innerHTML=`
+    const card = document.createElement('div');
+    card.className = 'equipamento-card';
+    if(e.tag.endsWith('R')) card.classList.add('reserva');
+    card.id = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
+    const icons = {local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
+    card.innerHTML = `
         <div class="equipamento-header"><span class="tag">${e.tag}</span></div>
         <div class="equipamento-info">
             <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local}</span></div>
