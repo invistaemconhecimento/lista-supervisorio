@@ -4,51 +4,42 @@ document.addEventListener('DOMContentLoaded', function() {
     configurarFiltros();
 });
 
-// CARREGAR EQUIPAMENTOS
 async function carregarEquipamentos() {
     try {
         const response = await fetch('lista.json');
         const equipamentos = await response.json();
 
-        document.getElementById('totalEquipamentos').textContent = 
+        document.getElementById('totalEquipamentos').textContent =
             `${equipamentos.length} equipamento${equipamentos.length !== 1 ? 's' : ''}`;
 
         preencherCategorias(equipamentos);
         exibirEquipamentos(equipamentos);
         gerarIndice(equipamentos);
 
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            filtrarEquipamentos(equipamentos);
-        });
-
-        document.getElementById('filterCategory').addEventListener('change', function() {
-            filtrarEquipamentos(equipamentos);
-        });
+        document.getElementById('searchInput').addEventListener('input', () => filtrarEquipamentos(equipamentos));
+        document.getElementById('filterCategory').addEventListener('change', () => filtrarEquipamentos(equipamentos));
 
         // BOTÃO FLUTUANTE
         window.addEventListener("scroll", () => {
             const botao = document.getElementById("btnFlutuanteTopo");
-            if (window.scrollY > 250) {
-                botao.classList.add("mostrar");
-            } else {
-                botao.classList.remove("mostrar");
-            }
+            if (window.scrollY > 250) botao.classList.add("mostrar");
+            else botao.classList.remove("mostrar");
         });
 
     } catch (error) {
         console.error('Erro ao carregar equipamentos:', error);
-        document.getElementById('equipamentosContainer').innerHTML = 
+        document.getElementById('equipamentosContainer').innerHTML =
             '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
     }
 }
 
 function preencherCategorias(equipamentos) {
-    const categorias = [...new Set(equipamentos.map(e => e.categoria))].sort();
     const select = document.getElementById('filterCategory');
-    categorias.forEach(categoria => {
+    const categorias = [...new Set(equipamentos.map(e => e.categoria))].sort();
+    categorias.forEach(c => {
         const option = document.createElement('option');
-        option.value = categoria;
-        option.textContent = categoria;
+        option.value = c;
+        option.textContent = c;
         select.appendChild(option);
     });
 }
@@ -56,21 +47,15 @@ function preencherCategorias(equipamentos) {
 function exibirEquipamentos(equipamentos) {
     const container = document.getElementById('equipamentosContainer');
     container.innerHTML = '';
+    if (equipamentos.length === 0) container.innerHTML = '<div class="no-results">Nenhum equipamento encontrado.</div>';
 
-    if (equipamentos.length === 0) {
-        container.innerHTML = '<div class="no-results">Nenhum equipamento encontrado.</div>';
-        return;
-    }
-
-    equipamentos.forEach(e => {
-        container.appendChild(criarCardEquipamento(e));
-    });
+    equipamentos.forEach(e => container.appendChild(criarCardEquipamento(e)));
 }
 
-function criarCardEquipamento(equipamento) {
+function criarCardEquipamento(equip) {
     const card = document.createElement('div');
     card.className = 'equipamento-card';
-    card.id = `equip-${equipamento.id}`;
+    card.id = `equip-${equip.id}`;
 
     const icons = {
         local: 'fas fa-map-marker-alt',
@@ -82,55 +67,32 @@ function criarCardEquipamento(equipamento) {
 
     card.innerHTML = `
         <div class="equipamento-header">
-            <span class="tag">${equipamento.tag}</span>
-            <span class="id-badge">${equipamento.id}</span>
+            <span class="tag">${equip.tag}</span>
+            <span class="id-badge">${equip.id}</span>
         </div>
         <div class="equipamento-info">
-            <div class="info-item">
-                <span class="info-label"><i class="${icons.local}"></i> Local:</span>
-                <span class="info-value">${equipamento.local}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span>
-                <span class="info-value">${equipamento.categoria}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label"><i class="${icons.tela}"></i> Tela:</span>
-                <span class="info-value">${equipamento.tela}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span>
-                <span class="info-value">${equipamento.entrada}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label"><i class="${icons.saída}"></i> Saída:</span>
-                <span class="info-value">${equipamento.saída}</span>
-            </div>
+            <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${equip.local}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${equip.categoria}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${equip.tela}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${equip.entrada}</span></div>
+            <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${equip.saída}</span></div>
         </div>
-
-        <button class="btn-voltar-indice" onclick="window.location.hash='topo-indice'">
-            <i class="fas fa-arrow-up"></i> Voltar ao Índice
-        </button>
+        <button class="btn-voltar-indice" onclick="window.location.hash='topo-indice'"><i class="fas fa-arrow-up"></i> Voltar ao Índice</button>
     `;
-
     return card;
 }
 
 function filtrarEquipamentos(equipamentos) {
-    const termoBusca = document.getElementById('searchInput').value.toLowerCase();
-    const categoriaSelecionada = document.getElementById('filterCategory').value;
+    const termo = document.getElementById('searchInput').value.toLowerCase();
+    const categoria = document.getElementById('filterCategory').value;
 
-    const filtrados = equipamentos.filter(e => {
-        const buscaMatch =
-            e.tag.toLowerCase().includes(termoBusca) ||
-            e.local.toLowerCase().includes(termoBusca) ||
-            e.categoria.toLowerCase().includes(termoBusca) ||
-            e.tela.toLowerCase().includes(termoBusca);
-
-        const categoriaMatch = !categoriaSelecionada || e.categoria === categoriaSelecionada;
-
-        return buscaMatch && categoriaMatch;
-    });
+    const filtrados = equipamentos.filter(e =>
+        (e.tag.toLowerCase().includes(termo) ||
+         e.local.toLowerCase().includes(termo) ||
+         e.categoria.toLowerCase().includes(termo) ||
+         e.tela.toLowerCase().includes(termo)) &&
+        (!categoria || e.categoria === categoria)
+    );
 
     exibirEquipamentos(filtrados);
 }
@@ -138,20 +100,8 @@ function filtrarEquipamentos(equipamentos) {
 function configurarFiltros() {
     const estilo = document.createElement('style');
     estilo.textContent = `
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            font-size: 1.2rem;
-        }
-        .error {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: #e74c3c;
-            font-size: 1.2rem;
-        }
+        .no-results { grid-column: 1/-1; text-align:center; padding:40px; color:#7f8c8d; font-size:1.2rem; }
+        .error { grid-column:1/-1; text-align:center; padding:40px; color:#e74c3c; font-size:1.2rem; }
     `;
     document.head.appendChild(estilo);
 }
