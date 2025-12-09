@@ -13,6 +13,8 @@ async function carregarEquipamentos() {
     try {
         const response = await fetch('lista.json');
         const equipamentos = await response.json();
+        gerarIndice(equipamentos);
+
         
         // Atualizar contador
         document.getElementById('totalEquipamentos').textContent = 
@@ -71,6 +73,8 @@ function exibirEquipamentos(equipamentos) {
 function criarCardEquipamento(equipamento) {
     const card = document.createElement('div');
     card.className = 'equipamento-card';
+    card.id = `equip-${equipamento.id}`;
+
     
     // Ícones para cada campo
     const icons = {
