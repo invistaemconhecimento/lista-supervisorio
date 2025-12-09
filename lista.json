@@ -10,12 +10,12 @@
   },
   {
     "id": 2,
-    "tag": "4250-PU-032",
-    "local": "Espessador de Rejeito",
+    "tag": "4250-PU-031R",
+    "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
     "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "Underflow do Espessador de Rejeito",
-    "saída": "TK-007"
+    "entrada": "Underflow do Espessador de Concentrado",
+    "saída": "TK-006"
   },
   {
     "id": 3,
