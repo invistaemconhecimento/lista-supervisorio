@@ -10,7 +10,6 @@ async function carregarEquipamentos() {
         const response = await fetch('lista.json');
         const equipamentos = await response.json();
 
-        // Atualizar contador
         document.getElementById('totalEquipamentos').textContent = 
             `${equipamentos.length} equipamento${equipamentos.length !== 1 ? 's' : ''}`;
 
@@ -63,8 +62,8 @@ function exibirEquipamentos(equipamentos) {
         return;
     }
 
-    equipamentos.forEach(equip => {
-        container.appendChild(criarCardEquipamento(equip));
+    equipamentos.forEach(e => {
+        container.appendChild(criarCardEquipamento(e));
     });
 }
 
