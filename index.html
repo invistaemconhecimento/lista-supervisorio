@@ -3,30 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipamentos - ERO Brasil Tucumã</title>
-
+    <title>Controle de Equipamentos</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/a2e0e9a66b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
+            <div class="filtros">
+                <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
+                <select id="filterCategory">
+                    <option value="">Todas Categorias</option>
+                </select>
+            </div>
+            <div class="stats">
+                <span id="totalEquipamentos">0 equipamentos</span>
+            </div>
+        </header>
 
-<header>
-    <h1>Lista de Equipamentos</h1>
-</header>
+        <nav class="indice-container" id="topo-indice">
+            <h2>Índice de Equipamentos</h2>
+            <ul id="indiceEquipamentos"></ul>
+        </nav>
 
-<!-- CONTAINER DO ÍNDICE -->
-<nav class="indice-container" id="topo-indice">
-    <h2>Índice de Equipamentos</h2>
-    <ul id="indiceEquipamentos"></ul>
-</nav>
+        <main>
+            <div class="equipamentos-container" id="equipamentosContainer">
+                <!-- Os equipamentos serão carregados aqui via JavaScript -->
+            </div>
+        </main>
 
-<main>
-    <section id="listaEquipamentos" class="lista-equipamentos"></section>
-</main>
+        <footer>
+            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
+        </footer>
+    </div>
 
-<script src="script.js"></script>
+    <!-- BOTÃO FLUTUANTE -->
+    <button id="btnFlutuanteTopo" onclick="window.location.hash='topo-indice'">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
+    <script src="script.js"></script>
 </body>
 </html>
