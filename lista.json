@@ -1,227 +1,27 @@
 [
-  {
-    "tag": "4260-PU-155",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem de alta pressão",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-050",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4260-PU-155R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem de alta pressão",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-050",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4250-PU-030",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Overflow do concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4250-TK-005",
-    "saída": "4250-TK-047"
-  },
-  {
-    "tag": "4250-PU-030R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Overflow do concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4250-TK-005",
-    "saída": "4250-TK-047"
-  },
-  {
-    "tag": "4260-PU-052",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Filtrado do Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-014",
-    "saída": "Sump de concentrado"
-  },
-  {
-    "tag": "4260-PU-052R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Filtrado do Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-014",
-    "saída": "Sump de concentrado"
-  },
-  {
-    "tag": "4250-PU-031",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Polpa",
-    "descrição": "Underflow do Espessador de Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4250-TH-001",
-    "saída": "TK-006"
-  },
-  {
-    "tag": "4250-PU-031R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Polpa",
-    "descrição": "Underflow do Espessador de Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4250-TH-001",
-    "saída": "TK-006"
-  },
-  {
-    "tag": "4260-PU-035",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Polpa",
-    "descrição": "Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "TK-006",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4260-PU-035R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Polpa",
-    "descrição": "Concentrado",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "TK-006",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4260-PU-050",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-050",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4260-PU-050R",
-    "local": "Espessador de Concentrado",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem",
-    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
-    "entrada": "4260-TK-050",
-    "saída": "Filtro 1"
-  },
-  {
-    "tag": "4280-PU-040",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de polpa",
-    "descrição": "Underflow do Espessador de rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "4280-TH-002",
-    "saída": "5800-TK-007"
-  },
-  {
-    "tag": "4280-PU-040R",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de polpa",
-    "descrição": "Underflow do Espessador de rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "4280-TH-002",
-    "saída": "5800-TK-007"
-  },
-  {
-    "tag": "5800-PU-045",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de polpa",
-    "descrição": "Rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-007",
-    "saída": "FL-002"
-  },
-  {
-    "tag": "5800-PU-046",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de polpa",
-    "descrição": "Rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-007",
-    "saída": "FL-003"
-  },
-  {
-    "tag": "5800-PU-045R",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de polpa",
-    "descrição": "Rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-007",
-    "saída": "FL-004"
-  },
-  {
-    "tag": "5800-PU-215",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-215R",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-216",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-053",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem de alta pressão",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-054",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem de alta pressão",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-055",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Água de lavagem de alta pressão",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-053",
-    "saída": "Filtros de Rejeito"
-  },
-  {
-    "tag": "5800-PU-048",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Filtrado do Rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-013",
-    "saída": "4280-TH-002"
-  },
-  {
-    "tag": "5800-PU-048R",
-    "local": "Espessador de Rejeito",
-    "categoria": "Bomba de Água",
-    "descrição": "Filtrado do Rejeito",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
-    "entrada": "5800-TK-013",
-    "saída": "4280-TH-002"
-  }
+  {"id":1,"tag":"4260-PU-155","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Água de lavagem de alta pressão","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-050","saída":"Filtro 1"},
+  {"id":2,"tag":"4260-PU-155R","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Água de lavagem de alta pressão","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-050","saída":"Filtro 1"},
+  {"id":3,"tag":"4250-PU-030","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Overflow do concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4250-TK-005","saída":"4250-TK-047"},
+  {"id":4,"tag":"4250-PU-030R","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Overflow do concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4250-TK-005","saída":"4250-TK-047"},
+  {"id":5,"tag":"4260-PU-052","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Filtrado do Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-014","saída":"Sump de concentrado"},
+  {"id":6,"tag":"4260-PU-052R","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Filtrado do Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-014","saída":"Sump de concentrado"},
+  {"id":7,"tag":"4250-PU-031","local":"Espessador de Concentrado","categoria":"Bomba de polpa","descrição":"Underflow do Espessador de Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4250-TH-001","saída":"TK-006"},
+  {"id":8,"tag":"4250-PU-031R","local":"Espessador de Concentrado","categoria":"Bomba de polpa","descrição":"Underflow do Espessador de Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4250-TH-001","saída":"TK-006"},
+  {"id":9,"tag":"4260-PU-035","local":"Espessador de Concentrado","categoria":"Bomba de polpa","descrição":"Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"TK-006","saída":"Filtro 1"},
+  {"id":10,"tag":"4260-PU-035R","local":"Espessador de Concentrado","categoria":"Bomba de polpa","descrição":"Concentrado","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"TK-006","saída":"Filtro 1"},
+  {"id":11,"tag":"4260-PU-050","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Água de lavagem","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-050","saída":"Filtro 1"},
+  {"id":12,"tag":"4260-PU-050R","local":"Espessador de Concentrado","categoria":"Bomba de água","descrição":"Água de lavagem","tela":"FILTRAGEM / FILTRAGEM DE CONCENTRADO","entrada":"4260-TK-050","saída":"Filtro 1"},
+  {"id":13,"tag":"4280-PU-040","local":"Espessador de Rejeito","categoria":"Bomba de polpa","descrição":"Underflow do Espessador de rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"4280-TH-002","saída":"5800-TK-007"},
+  {"id":14,"tag":"4280-PU-040R","local":"Espessador de Rejeito","categoria":"Bomba de polpa","descrição":"Underflow do Espessador de rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"4280-TH-002","saída":"5800-TK-007"},
+  {"id":15,"tag":"5800-PU-045","local":"Espessador de Rejeito","categoria":"Bomba de polpa","descrição":"Rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-007","saída":"FL-002"},
+  {"id":16,"tag":"5800-PU-046","local":"Espessador de Rejeito","categoria":"Bomba de polpa","descrição":"Rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-007","saída":"FL-003"},
+  {"id":17,"tag":"5800-PU-045R","local":"Espessador de Rejeito","categoria":"Bomba de polpa","descrição":"Rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-007","saída":"FL-004"},
+  {"id":18,"tag":"5800-PU-215","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":19,"tag":"5800-PU-215R","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":20,"tag":"5800-PU-216","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":21,"tag":"5800-PU-053","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem de alta pressão","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":22,"tag":"5800-PU-054","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem de alta pressão","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":23,"tag":"5800-PU-055","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Água de lavagem de alta pressão","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-053","saída":"Filtros de Rejeito"},
+  {"id":24,"tag":"5800-PU-048","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Filtrado do Rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-013","saída":"4280-TH-002"},
+  {"id":25,"tag":"5800-PU-048R","local":"Espessador de Rejeito","categoria":"Bomba de água","descrição":"Filtrado do Rejeito","tela":"FILTRAGEM / FILTRAGEM DE REJEITO","entrada":"5800-TK-013","saída":"4280-TH-002"}
 ]
