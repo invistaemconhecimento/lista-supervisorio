@@ -1,330 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revista DSSMA | Saúde, Segurança e Meio Ambiente</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f2f2f2;
-            color: #333;
-            line-height: 1.6;
-            padding: 10px;
-        }
-        .container { max-width: 800px; margin: 0 auto; }
-
-        .capa {
-            background: linear-gradient(135deg, #378c8c 0%, #3a8c84 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .capa h1 { font-size: 1.6rem; margin-bottom: 10px; }
-        .capa p { font-size: 1rem; opacity: 0.9; margin-bottom: 15px; }
-
-        .indice {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .indice h2 { color: #378c8c; margin-bottom: 15px; font-size: 1.3rem; }
-        .indice-lista { display: flex; flex-direction: column; gap: 10px; }
-        .indice-item {
-            display: block;
-            padding: 15px;
-            background: rgba(55, 140, 140, 0.08);
-            border-radius: 10px;
-            border-left: 4px solid #378c8c;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.2s;
-        }
-        .indice-item:hover { transform: translateY(-3px); }
-
-        .pagina {
-            background: white;
-            border-radius: 15px;
-            padding: 25px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid #378c8c;
-            position: relative;
-        }
-
-        .pagina-numero {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #378c8c;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .pagina-titulo { color: #378c8c; font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; padding-right: 50px; }
-
-        .pergunta {
-            background: rgba(55, 140, 140, 0.08);
-            border-left: 4px solid #378c8c;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin-top: 20px;
-        }
-        .pergunta-titulo { color: #378c8c; font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; }
-        .pergunta-texto { font-size: 1rem; color: #58594f; font-style: italic; line-height: 1.5; }
-
-        .navegacao { display: flex; justify-content: space-between; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(0, 0, 0, 0.1); gap: 10px; flex-wrap: wrap; }
-        .btn {
-            padding: 12px 20px;
-            background: #378c8c;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: all 0.2s;
-            min-height: 45px;
-        }
-        .btn-voltar { background: #93bfbb; color: #043; }
-
-        .rodape {
-            background: rgba(55, 140, 140, 0.08);
-            border-radius: 15px;
-            padding: 25px 20px;
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .topo-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: #378c8c;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .topo-btn.visible { opacity: 1; }
-
-        @media (max-width: 768px) {
-            .capa h1 { font-size: 1.4rem; }
-            .pagina { padding: 20px 15px; }
-            .pagina-titulo { font-size: 1.1rem; }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Equipamentos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <a href="#capa" class="topo-btn" id="topoBtn" aria-label="Subir ao topo"><i class="fas fa-arrow-up"></i></a>
-
     <div class="container">
-        <section class="capa" id="capa">
-            <img src="logoERO.png" alt="Logo ERO" style="width:120px; border-radius:5px;" />
-            <h1>Revista DSSMA - Beneficiamento ERO Tucumã</h1>
-            <p>Edição Especial de Dezembro de 2025</p>
-            <p><strong>Cuidar é prevenir. Trabalhar juntos é evoluir.</strong></p>
-            <div style="margin-top:20px;">
-                <a href="#sobre" class="btn" style="background:#93bfbb;"><i class="fas fa-info-circle"></i> Sobre</a>
+        <header>
+            <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
+            <div class="filtros">
+                <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
+                <select id="filterCategory">
+                    <option value="">Todas Categorias</option>
+                </select>
             </div>
-        </section>
-
-        <section class="indice" id="indice">
-            <h2><i class="fas fa-list-ol"></i> Índice Interativo</h2>
-            <p style="margin-bottom:15px; color:#666; font-size:0.9rem;">Toque em qualquer tópico para ler:</p>
-            <div class="indice-lista" id="indiceLista"></div>
-            <div style="text-align:center; margin-top:20px;">
-                <a href="#pagina-1" id="startReadingBtn" class="btn" style="background:#d45a2e;"><i class="fas fa-play-circle"></i> Começar a Ler</a>
+            <div class="stats">
+                <span id="totalEquipamentos">0 equipamentos</span>
             </div>
-        </section>
+        </header>
 
-        <div id="paginas"></div>
+        <main>
+            <div class="equipamentos-container" id="equipamentosContainer">
+                <!-- Os equipamentos serão carregados aqui via JavaScript -->
+            </div>
+        </main>
 
-        <section class="rodape" id="rodape">
-            <h3>PENSE SEGURO. AJA SEGURO. VOLTE SEGURO.</h3>
-            <p style="margin:15px 0; color:#555;">Comunique, previna, cuide-se e cuide do próximo.</p>
-            <a href="#capa" class="btn" style="background:#93bfbb;"><i class="fas fa-home"></i> Voltar ao Início</a>
-        </section>
+        <footer>
+            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
+        </footer>
     </div>
 
-    <script>
-        (function () {
-            const topoBtn = document.getElementById('topoBtn');
-            window.addEventListener('scroll', function () {
-                topoBtn.classList.toggle('visible', window.scrollY > 300);
-            });
-
-            document.addEventListener('click', function (e) {
-                const a = e.target.closest('a[href^="#"]');
-                if (!a) return;
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    window.scrollTo({ top: target.offsetTop - 20, behavior: 'smooth' });
-                }
-            });
-
-            async function carregarTemas() {
-                try {
-                    const res = await fetch('temas.json', { cache: 'no-store' });
-                    const temas = await res.json();
-                    gerarIndice(temas);
-                    gerarPaginas(temas);
-                } catch (err) {
-                    document.getElementById('paginas').innerHTML =
-                        `<div style="background:#ffecec;border:1px solid #f5c6cb;padding:20px;border-radius:10px;">Erro ao carregar <strong>temas.json</strong>: ${err.message}</div>`;
-                }
-            }
-
-            function gerarIndice(temas) {
-                document.getElementById('indiceLista').innerHTML = temas
-                    .map(
-                        t => `
-                    <a href="#pagina-${t.id}" class="indice-item">
-                        <div class="indice-numero">${t.id}. ${t.titulo}</div>
-                    </a>`
-                    )
-                    .join('');
-
-                const startBtn = document.getElementById('startReadingBtn');
-                if (temas.length) startBtn.href = `#pagina-${temas[0].id}`;
-            }
-
-            function gerarPaginas(temas) {
-                document.getElementById('paginas').innerHTML = temas
-                    .map(
-                        (t, i) => `
-                <section class="pagina" id="pagina-${t.id}">
-                    <div class="pagina-numero">${t.id}</div>
-                    <h2 class="pagina-titulo"><i class="${t.icone}"></i> ${t.titulo}</h2>
-                    <div class="pagina-conteudo">${t.conteudo}</div>
-
-                    <div class="pergunta">
-                        <div class="pergunta-titulo"><i class="fas fa-question-circle"></i> PARA REFLEXÃO NO DSSMA</div>
-                        <div class="pergunta-texto">"${t.pergunta}"</div>
-                    </div>
-
-                    <div class="navegacao">
-                        ${i > 0 ? `<a href="#pagina-${temas[i - 1].id}" class="btn btn-voltar"><i class="fas fa-arrow-left"></i> Anterior</a>` : '<div></div>'}
-                        ${i < temas.length - 1 ? `<a href="#pagina-${temas[i + 1].id}" class="btn">Próximo <i class="fas fa-arrow-right"></i></a>` : '<div></div>'}
-                    </div>
-
-                    <div style="text-align:center; margin-top:15px;">
-                        <a href="#indice" class="btn btn-voltar"><i class="fas fa-list"></i> Índice</a>
-                    </div>
-                </section>`
-                    )
-                    .join('');
-            }
-
-            carregarTemas();
-        })();
-    </script>
-    
-<section class="pagina" id="sobre">
-    <div class="pagina-numero"><i class="fas fa-info-circle"></i></div>
-    <h2 class="pagina-titulo">Sobre a Revista DSSMA</h2>
-    <div class="pagina-conteudo">
-        <p style="margin-bottom: 15px;">Esta revista digital é uma publicação interna do <strong>Beneficiamento ERO Tucumã</strong>, dedicada à disseminação de conhecimento sobre Saúde, Segurança e Meio Ambiente (DSSMA).</p>
-        
-        <div style="background: rgba(55, 140, 140, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-            <h3 style="color: #378c8c; margin-bottom: 15px; font-size: 1.1rem;">
-                <i class="fas fa-bullseye"></i> Nossa Missão
-            </h3>
-            <p>Promover uma cultura de segurança, prevenção de acidentes e cuidado ambiental entre todos os colaboradores, através de conteúdo educativo e reflexivo.</p>
-        </div>
-        
-        <div style="background: rgba(55, 140, 140, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-            <h3 style="color: #378c8c; margin-bottom: 15px; font-size: 1.1rem;">
-                <i class="fas fa-newspaper"></i> Ficha Técnica
-            </h3>
-            <ul style="padding-left: 20px; list-style-type: none;">
-                <li style="margin-bottom: 8px;"><strong>Edição:</strong> Especial de Dezembro de 2025</li>
-                <li style="margin-bottom: 8px;"><strong>Ultima atualização:</strong> 08/12/2025</li>
-                <li style="margin-bottom: 8px;"><strong>Público-alvo:</strong> Colaboradores Industrais ERO Tucumã</li>
-                <li style="margin-bottom: 8px;"><strong>Formato:</strong> Revista Digital Interativa</li>
-            </ul>
-        </div>
-        
-        <div style="background: rgba(55, 140, 140, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-            <h3 style="color: #378c8c; margin-bottom: 15px; font-size: 1.1rem;">
-                <i class="fas fa-users"></i> Equipe Editorial
-            </h3>
-            <div style="display: grid; gap: 15px;">
-                <div style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #378c8c;">
-                    <strong style="color: #378c8c; display: block; margin-bottom: 5px;">Idealização</strong>
-                    <p style="margin-bottom: 5px;">Aline Suene</p>
-                    <p style="font-size: 0.9rem; color: #666;">aline.andrade@erobr.com</p>
-                </div>
-
-                <div style="display: grid; gap: 15px;">
-                <div style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #378c8c;">
-                    <strong style="color: #378c8c; display: block; margin-bottom: 5px;">Revisão</strong>
-                    <p style="margin-bottom: 5px;">Odino Cutrim</p>
-                    <p style="font-size: 0.9rem; color: #666;">odino.junior@erobr.com</p>
-                </div>
-                
-                <div style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #d45a2e;">
-                    <strong style="color: #d45a2e; display: block; margin-bottom: 5px;">Criação e Edição</strong>
-                    <p style="margin-bottom: 5px;">Alexandre Oliveira</p>
-                    <p style="font-size: 0.9rem; color: #666;">+55 (94) 99232-7693</p>
-                    <p style="font-size: 0.9rem; color: #666;">alexandre.oliveira@erobr.com</p>
-                </div>
-            </div>
-        </div>
-        
-        <div style="background: rgba(55, 140, 140, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
-            <h3 style="color: #378c8c; margin-bottom: 15px; font-size: 1.1rem;">
-                <i class="fas fa-question-circle"></i> Como usar esta revista
-            </h3>
-            <ul style="padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Navegue pelo <strong>Índice Interativo</strong> para acessar os temas</li>
-                <li style="margin-bottom: 8px;">Use os botões <strong>Anterior/Próximo</strong> para navegar sequencialmente</li>
-                <li style="margin-bottom: 8px;">Reflita sobre as perguntas ao final de cada página</li>
-                <li style="margin-bottom: 8px;">Compartilhe o conhecimento com seus colegas</li>
-                <li style="margin-bottom: 8px;">Utilize o botão <i class="fas fa-arrow-up"></i> para voltar ao topo rapidamente</li>
-            </ul>
-        </div>
-        
-        <div style="text-align: center; padding: 15px; margin-top: 20px; border-top: 2px dashed #378c8c;">
-            <p style="font-style: italic; color: #555;">
-                "Cuidar é prevenir. Trabalhar juntos é evoluir."
-            </p>
-        </div>
-    </div>
-    
-    <div style="text-align:center; margin-top:20px;">
-        <a href="#capa" class="btn" style="background:#93bfbb;"><i class="fas fa-home"></i> Voltar ao Início</a>
-        <a href="#indice" class="btn btn-voltar"><i class="fas fa-list"></i> Ver Índice Completo</a>
-        <a href="#pagina-1" class="btn" style="margin-left: 10px;"><i class="fas fa-play-circle"></i> Começar a Ler</a>
-    </div>
-</section>
-    
+    <script src="script.js"></script>
 </body>
 </html>
