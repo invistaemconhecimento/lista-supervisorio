@@ -1,6 +1,6 @@
 [
   {
-    "id": '4250-PU-031',
+    "id": "4250-PU-031",
     "titulo": "Bomba de polpa",
     "icone": "fas fa-hard-hat",
     "categoria": "Espessador de Concentrado",
@@ -9,7 +9,7 @@
     "pergunta": "Alterar"
   },
   {
-    "id": '4250-PU-031R',
+    "id": "4250-PU-031R",
     "titulo": "Áreas de Risco: Sinalizar é Proteger",
     "icone": "fas fa-hard-hat",
     "categoria": "Espessador de Concentrado",
