@@ -24,7 +24,7 @@
 
         .equipamento-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; }
         .tag { background:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:0.9rem; }
-        .id-badge { background:#e74c3c; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+        .id-badge { display:none; } /* sem id */
 
         .equipamento-info { margin-top:15px; flex:1; }
         .info-item { display:flex; align-items:flex-start; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #eee; }
@@ -57,8 +57,8 @@
 
         .indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
         .indice-container h2 { margin-bottom:10px; color:#2c3e50; }
-        #indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 5px; } /* horizontal 10px, vertical 5px */
-        #indiceEquipamentos li { margin:2px 0; } /* pequeno espaçamento vertical extra */
+        #indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 5px; }
+        #indiceEquipamentos li { margin:2px 0; }
         #indiceEquipamentos li a { background:#3498db; color:white; padding:6px 12px; border-radius:8px; text-decoration:none; font-size:.9rem; transition:.2s; }
         #indiceEquipamentos li a:hover { background:#2978b8; }
 
@@ -147,8 +147,9 @@
         function gerarIndice(equipamentos){
             const indice = document.getElementById('indiceEquipamentos'); indice.innerHTML='';
             equipamentos.forEach(e => {
+                const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="#equip-${e.id}">${e.tag}</a>`;
+                li.innerHTML = `<a href="#${tagID}">${e.tag}</a>`;
                 indice.appendChild(li);
             });
         }
@@ -160,12 +161,13 @@
         }
 
         function criarCardEquipamento(equip){
-            const card = document.createElement('div'); card.className='equipamento-card'; card.id=`equip-${equip.id}`;
+            const card = document.createElement('div'); 
+            card.className='equipamento-card'; 
+            card.id = `equip-${equip.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
             const icons = { local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', entrada:'fas fa-arrow-right', saída:'fas fa-arrow-left' };
             card.innerHTML = `
                 <div class="equipamento-header">
                     <span class="tag">${equip.tag}</span>
-                    <span class="id-badge">${equip.id}</span>
                 </div>
                 <div class="equipamento-info">
                     <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${equip.local}</span></div>
