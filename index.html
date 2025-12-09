@@ -10,8 +10,9 @@
 body { font-family:'Segoe UI', Tahoma, Geneva, Verdana,sans-serif; background:linear-gradient(135deg,#f5f7fa,#c3cfe2); min-height:100vh; padding:20px; }
 .container { max-width:1200px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
 
-header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; }
-header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px; }
+header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:15px; }
+header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:0; }
+header h1 img { max-height:50px; }
 
 .filtros { 
     display:grid; 
@@ -31,7 +32,6 @@ header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:
 .stats { font-size:1.1rem; opacity:0.9; margin-top:5px; text-align:center; }
 
 main { padding:30px; text-align:center; }
-.logo-capa { max-width:150px; margin:0 auto 30px; display:block; }
 
 .equipamentos-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(350px,1fr)); gap:25px; }
 
@@ -91,14 +91,14 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
 @media(max-width:768px){
     .equipamentos-container { grid-template-columns:1fr; }
     header h1 { font-size:2rem; }
-    .logo-capa { max-width:120px; margin-bottom:20px; }
+    header h1 img { max-height:40px; }
 }
 </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1><i class="fas fa-industry"></i> Controle de Equipamentos</h1>
+        <h1><img src="logoERO.png" alt="Logo ERO"> Controle de Equipamentos</h1>
         <div class="filtros">
             <input type="text" id="searchInput" placeholder="Buscar por TAG, local ou categoria...">
             <select id="filterCategory"><option value="">Todas Categorias</option></select>
@@ -114,7 +114,6 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     </nav>
 
     <main>
-        <img src="logoERO.png" alt="Logo ERO" class="logo-capa">
         <div class="equipamentos-container" id="equipamentosContainer"></div>
     </main>
 
