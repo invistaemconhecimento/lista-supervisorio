@@ -155,3 +155,19 @@ function configurarFiltros() {
     `;
     document.head.appendChild(estilo);
 }
+
+function gerarIndice(equipamentos) {
+    const indice = document.getElementById('indiceEquipamentos');
+    indice.innerHTML = '';
+
+    equipamentos.forEach(equip => {
+        // ID para o scroll direto
+        const idElement = `equip-${equip.id}`;
+
+        // Criar item do índice
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${idElement}">${equip.tag}</a>`;
+        indice.appendChild(li);
+    });
+}
+
