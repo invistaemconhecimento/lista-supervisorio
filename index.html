@@ -14,7 +14,7 @@ header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; paddin
 header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px; }
 .filtros { display:flex; gap:15px; max-width:800px; margin:0 auto 20px; }
 #searchInput,#filterCategory { flex:1; padding:12px 20px; border:none; border-radius:8px; font-size:1rem; background:rgba(255,255,255,0.9); }
-.stats { font-size:1.1rem; opacity:0.9; }
+.stats { font-size:1.1rem; opacity:0.9; margin-top:5px; text-align:center; }
 
 main { padding:30px; }
 .equipamentos-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(350px,1fr)); gap:25px; }
@@ -160,10 +160,20 @@ function atualizarIndice(equipamentos){
     });
 }
 
+function atualizarContagem(equipamentos){
+    const span = document.getElementById('totalEquipamentos');
+    span.textContent = `${equipamentos.length} equipamento${equipamentos.length !== 1 ? 's' : ''}`;
+}
+
 function exibirEquipamentos(equipamentos){
-    const container = document.getElementById('equipamentosContainer'); container.innerHTML='';
-    if(equipamentos.length === 0){ container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; return; }
-    equipamentos.forEach(e => container.appendChild(criarCard(e)));
+    const container = document.getElementById('equipamentosContainer'); 
+    container.innerHTML='';
+    if(equipamentos.length === 0){ 
+        container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; 
+    } else {
+        equipamentos.forEach(e => container.appendChild(criarCard(e)));
+    }
+    atualizarContagem(equipamentos);
 }
 
 function criarCard(e){
