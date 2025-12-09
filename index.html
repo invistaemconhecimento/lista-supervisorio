@@ -12,9 +12,21 @@ body { font-family:'Segoe UI', Tahoma, Geneva, Verdana,sans-serif; background:li
 
 header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; }
 header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px; }
-.filtros { display:flex; flex-wrap:wrap; gap:15px; max-width:1000px; margin:0 auto 20px; justify-content:center; }
-.filtros > * { flex:1 1 200px; } /* responsivo: mínimo 200px, cresce conforme espaço */
-#searchInput,#filterCategory,#filterLocal,#filterTela { padding:12px 20px; border:none; border-radius:8px; font-size:1rem; background:rgba(255,255,255,0.9); }
+
+.filtros { 
+    display:grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap:15px; 
+    max-width:1000px; 
+    margin:0 auto 10px; 
+}
+#searchInput, #filterCategory, #filterLocal, #filterTela {
+    padding:12px 20px; 
+    border:none; 
+    border-radius:8px; 
+    font-size:1rem; 
+    background:rgba(255,255,255,0.9); 
+}
 
 .stats { font-size:1.1rem; opacity:0.9; margin-top:5px; text-align:center; }
 
@@ -23,8 +35,6 @@ main { padding:30px; }
 
 .equipamento-card { background:white; border-radius:10px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; transition:transform 0.3s ease,box-shadow 0.3s ease; display:flex; flex-direction:column; }
 .equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
-
-/* Destaque para equipamentos reserva */
 .equipamento-card.reserva { border-left-color: #e67e22; background: #fff8f0; }
 
 .equipamento-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px; }
@@ -66,7 +76,6 @@ main { padding:30px; }
 #indiceEquipamentos li a { background:#3498db; color:white; padding:8px 14px; border-radius:8px; text-decoration:none; font-size:.95rem; transition:.2s; }
 #indiceEquipamentos li a:hover { background:#2978b8; }
 #indiceEquipamentos li a.active { background:#e74c3c; }
-/* Destaque para links reserva */
 #indiceEquipamentos a.reserva { background: #e67e22; }
 #indiceEquipamentos a.reserva:hover { background: #d35400; }
 
@@ -79,7 +88,6 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
 
 @media(max-width:768px){
     .equipamentos-container { grid-template-columns:1fr; }
-    .filtros { flex-direction:column; }
     header h1 { font-size:2rem; }
 }
 </style>
@@ -153,14 +161,17 @@ function preencherFiltros(equipamentos){
     const selectLocal = document.getElementById('filterLocal');
     const selectTela = document.getElementById('filterTela');
 
-    const categorias = [...new Set(equipamentos.map(e => e.categoria))].sort();
-    categorias.forEach(c => { const option = document.createElement('option'); option.value=c; option.textContent=c; selectCategoria.appendChild(option); });
+    [...new Set(equipamentos.map(e => e.categoria))].sort().forEach(c => { 
+        const option = document.createElement('option'); option.value=c; option.textContent=c; selectCategoria.appendChild(option); 
+    });
 
-    const locais = [...new Set(equipamentos.map(e => e.local))].sort();
-    locais.forEach(l => { const option = document.createElement('option'); option.value=l; option.textContent=l; selectLocal.appendChild(option); });
+    [...new Set(equipamentos.map(e => e.local))].sort().forEach(l => { 
+        const option = document.createElement('option'); option.value=l; option.textContent=l; selectLocal.appendChild(option); 
+    });
 
-    const telas = [...new Set(equipamentos.map(e => e.tela))].sort();
-    telas.forEach(t => { const option = document.createElement('option'); option.value=t; option.textContent=t; selectTela.appendChild(option); });
+    [...new Set(equipamentos.map(e => e.tela))].sort().forEach(t => { 
+        const option = document.createElement('option'); option.value=t; option.textContent=t; selectTela.appendChild(option); 
+    });
 }
 
 function atualizarIndice(equipamentos){
@@ -169,8 +180,7 @@ function atualizarIndice(equipamentos){
     equipamentos.forEach(e => {
         const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
         const li = document.createElement('li');
-        const isReserva = e.tag.endsWith('R') ? 'reserva' : '';
-        li.innerHTML = `<a href="#${tagID}" class="${isReserva}">${e.tag}</a>`;
+        li.innerHTML = `<a href="#${tagID}" class="${e.tag.endsWith('R') ? 'reserva' : ''}">${e.tag}</a>`;
         indice.appendChild(li);
     });
 }
@@ -227,7 +237,6 @@ function filtrar(equipamentos){
     atualizarIndice(filtrados);
 }
 
-// Destaque automático da tag visível no índice
 function atualizarIndiceAtivo(){
     const cards = document.querySelectorAll('.equipamento-card');
     let indexAtivo = null;
