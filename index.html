@@ -32,22 +32,6 @@
         .info-label { font-weight:600; color:#2c3e50; min-width:120px; display:flex; align-items:center; gap:8px; }
         .info-value { color:#34495e; flex:1; }
 
-        .btn-voltar-indice {
-            margin-top:15px;
-            padding:10px 14px;
-            background:#2c3e50;
-            color:white;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            font-size:0.9rem;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:5px;
-        }
-        .btn-voltar-indice:hover { background:#1f2e3b; }
-
         #btnFlutuanteTopo {
             position:fixed;
             bottom:25px;
@@ -120,32 +104,34 @@
         </footer>
     </div>
 
-    <!-- Botão flutuante -->
     <button id="btnFlutuanteTopo" title="Voltar ao índice"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-        const listaEquipamentos = [
-            { "id": 1, "tag": "4250-PU-031", "local": "Espessador de Concentrado", "categoria": "Bomba de Polpa", "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO", "entrada": "Underflow do Espessador de Concentrado", "saída": "TK-006" },
-            { "id": 2, "tag": "4250-PU-031R", "local": "Espessador de Concentrado", "categoria": "Bomba de Polpa", "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO", "entrada": "Underflow do Espessador de Concentrado", "saída": "TK-006" },
-            { "id": 3, "tag": "4260-PU-035", "local": "Espessador de Concentrado", "categoria": "Bomba de Polpa", "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO", "entrada": "TK-006", "saída": "Filtro 1" },
-            { "id": 4, "tag": "4260-PU-035R", "local": "Espessador de Concentrado", "categoria": "Bomba de Polpa", "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO", "entrada": "TK-006", "saída": "Filtro 1" }
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            gerarIndice(listaEquipamentos);
-            preencherCategorias(listaEquipamentos);
-            exibirEquipamentos(listaEquipamentos);
 
-            document.getElementById('searchInput').addEventListener('input', () => filtrarEquipamentos(listaEquipamentos));
-            document.getElementById('filterCategory').addEventListener('change', () => filtrarEquipamentos(listaEquipamentos));
+            try {
+                const response = await fetch('lista.json');
+                const equipamentos = await response.json();
 
-            const botao = document.getElementById("btnFlutuanteTopo");
-            window.addEventListener("scroll", () => {
-                if(window.scrollY > 250) botao.classList.add("mostrar");
-                else botao.classList.remove("mostrar");
-            });
-            botao.addEventListener("click", () => window.location.hash = "topo-indice");
+                gerarIndice(equipamentos);
+                preencherCategorias(equipamentos);
+                exibirEquipamentos(equipamentos);
+
+                document.getElementById('searchInput').addEventListener('input', () => filtrarEquipamentos(equipamentos));
+                document.getElementById('filterCategory').addEventListener('change', () => filtrarEquipamentos(equipamentos));
+
+                const botao = document.getElementById("btnFlutuanteTopo");
+                window.addEventListener("scroll", () => {
+                    if(window.scrollY > 250) botao.classList.add("mostrar");
+                    else botao.classList.remove("mostrar");
+                });
+                botao.addEventListener("click", () => window.location.hash = "topo-indice");
+
+            } catch (err) {
+                console.error("Erro ao carregar JSON:", err);
+                document.getElementById('equipamentosContainer').innerHTML = '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
+            }
         });
 
         function preencherCategorias(equipamentos){
@@ -155,7 +141,7 @@
         }
 
         function gerarIndice(equipamentos){
-            const indice = document.getElementById('indiceEquipamentos'); indice.innerHTML = '';
+            const indice = document.getElementById('indiceEquipamentos'); indice.innerHTML='';
             equipamentos.forEach(e => {
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="#equip-${e.id}">${e.tag}</a>`;
@@ -164,8 +150,7 @@
         }
 
         function exibirEquipamentos(equipamentos){
-            const container = document.getElementById('equipamentosContainer');
-            container.innerHTML = '';
+            const container = document.getElementById('equipamentosContainer'); container.innerHTML='';
             if(equipamentos.length === 0){ container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; return; }
             equipamentos.forEach(e => container.appendChild(criarCardEquipamento(e)));
         }
@@ -185,7 +170,6 @@
                     <div class="info-item"><span class="info-label"><i class="${icons.entrada}"></i> Entrada:</span><span class="info-value">${equip.entrada}</span></div>
                     <div class="info-item"><span class="info-label"><i class="${icons.saída}"></i> Saída:</span><span class="info-value">${equip.saída}</span></div>
                 </div>
-                <button class="btn-voltar-indice" onclick="window.location.hash='topo-indice'"><i class="fas fa-arrow-up"></i> Voltar ao Índice</button>
             `;
             return card;
         }
