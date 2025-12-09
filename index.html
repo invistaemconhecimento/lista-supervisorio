@@ -48,8 +48,11 @@
             align-items:center;
             justify-content:center;
             box-shadow:0 4px 12px rgba(0,0,0,0.3);
-            transition:0.3s ease;
+            transition:0.3s ease, opacity 0.3s ease;
+            opacity:0;
+            pointer-events:none;
         }
+        #btnFlutuanteTopo.show { opacity:1; pointer-events:auto; }
         #btnFlutuanteTopo:hover { background:#1f2e3b; transform:scale(1.1); }
 
         .indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; }
@@ -121,6 +124,15 @@
                 const botao = document.getElementById("btnFlutuanteTopo");
                 botao.addEventListener("click", () => {
                     document.getElementById('topo-indice').scrollIntoView({ behavior: 'smooth' });
+                });
+
+                // Mostrar ou esconder botão ao rolar
+                window.addEventListener('scroll', () => {
+                    if(window.scrollY > 200){
+                        botao.classList.add('show');
+                    } else {
+                        botao.classList.remove('show');
+                    }
                 });
 
             } catch (err) {
