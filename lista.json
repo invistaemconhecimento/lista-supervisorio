@@ -3,6 +3,7 @@
     "tag": "4250-PU-031",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "Underflow do Espessador de Concentrado",
     "saída": "TK-006"
@@ -11,6 +12,7 @@
     "tag": "4250-PU-031R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "Underflow do Espessador de Concentrado",
     "saída": "TK-006"
@@ -19,6 +21,7 @@
     "tag": "4260-PU-035",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "TK-006",
     "saída": "Filtro 1"
@@ -27,6 +30,7 @@
     "tag": "4260-PU-035R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "TK-006",
     "saída": "Filtro 1"
@@ -35,6 +39,7 @@
     "tag": "4260-PU-050",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4260-TK-050",
     "saída": "Filtro 1"
@@ -43,6 +48,7 @@
     "tag": "4260-PU-050R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4260-TK-050",
     "saída": "Filtro 1"
@@ -51,6 +57,7 @@
     "tag": "4260-PU-155",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "Água de lavagem",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4260-TK-050",
     "saída": "Filtro 1"
@@ -59,6 +66,7 @@
     "tag": "4260-PU-155R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "Água de lavagem",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4260-TK-050",
     "saída": "Filtro 1"
@@ -67,6 +75,7 @@
     "tag": "4250-PU-030",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "Água de lavagem de alta pressão",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4250-TK-005",
     "saída": "4250-TK-047"
@@ -75,8 +84,27 @@
     "tag": "4250-PU-030R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Água",
+    "descrição": "Água de lavagem de alta pressão",
     "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "4250-TK-005",
     "saída": "4250-TK-047"
+  },
+  {
+    "tag": "4260-PU-052",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "descrição": "Filtrado do Concentrado",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4260-TK-014",
+    "saída": "Sump de concentrado"
+  },
+  {
+    "tag": "4260-PU-052R",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Água",
+    "descrição": "Filtrado do Concentrado",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "4260-TK-014",
+    "saída": "Sump de concentrado"
   }
 ]
