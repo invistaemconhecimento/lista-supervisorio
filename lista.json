@@ -13,17 +13,26 @@
     "tag": "4250-PU-031R",
     "local": "Espessador de Concentrado",
     "categoria": "Bomba de Polpa",
-    "tela": "FILTRAGEM / FILTRAGEM DE REJEITO",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
     "entrada": "Underflow do Espessador de Concentrado",
     "saída": "TK-006"
   },
   {
     "id": 3,
-    "tag": "4250-AG-015",
-    "local": "Água de Processo",
-    "categoria": "Bomba Centrífuga",
-    "tela": "BOMBAS DE ÁGUA / PROCESSO",
-    "entrada": "Reservatório Água Processo",
-    "saída": "Distribuição Geral"
+    "tag": "4260-PU-035",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Polpa",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "TK-006",
+    "saída": "Filtro 1"
+  },
+  {
+    "id": 4,
+    "tag": "4260-PU-035R",
+    "local": "Espessador de Concentrado",
+    "categoria": "Bomba de Polpa",
+    "tela": "FILTRAGEM / FILTRAGEM DE CONCENTRADO",
+    "entrada": "TK-006",
+    "saída": "Filtro 1"
   }
 ]
