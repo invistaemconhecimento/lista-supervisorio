@@ -50,5 +50,6 @@
   { "id": 49, "tag": "4230-PU-214", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Bomba de recirculação da Jameson 2", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "Jameson 2", "saída": "Jameson 2" },
   { "id": 50, "tag": "4230-PU-214R", "local": "Flotação Cleaner", "categoria": "Bomba de polpa", "descrição": "Bomba de recirculação da Jameson 2", "tela": "FLOTAÇÃO / FLOT CLEANER-SCAVENGER", "entrada": "Jameson 2", "saída": "Jameson 2" },
   { "id": 51, "tag": "4160-PU-002", "local": "Moagem", "categoria": "Bomba de polpa", "descrição": "Bomba da ciclonagem de classificaçãol", "tela": "MOAGEM / MOAGEM", "entrada": "HP-003", "saída": "Ciclones" },
-  { "id": 52, "tag": "4160-PU-002R", "local": "Moagem", "categoria": "Bomba de polpa", "descrição": "Bomba da ciclonagem de classificaçãol", "tela": "MOAGEM / MOAGEM", "entrada": "HP-003", "saída": "Ciclones" }
+  { "id": 52, "tag": "4160-PU-002R", "local": "Moagem", "categoria": "Bomba de polpa", "descrição": "Bomba da ciclonagem de classificaçãol", "tela": "MOAGEM / MOAGEM", "entrada": "HP-003", "saída": "Ciclones" },
+  { "id": 53, "tag": "7530-PU-099", "local": "Distribuição de Água", "categoria": "Bomba de água", "descrição": "Bomba da alívio do TK-47", "tela": "DISTRIBUIÇÃO DE ÁGUA / DISTRIBUIÇÃO DE ÁGUA", "entrada": "TK-047", "saída": "Sump da Flotação" }
 ]
