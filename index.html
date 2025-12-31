@@ -222,29 +222,90 @@ main { padding:30px; text-align:center; }
 #btnFlutuanteTopo.show { opacity:1; pointer-events:auto; }
 #btnFlutuanteTopo:hover { background:#1f2e3b; transform:scale(1.1); }
 
-.indice-container { background:#ecf0f1; padding:20px; margin:0; border-bottom:2px solid #bdc3c7; transition: all 0.3s ease; }
-.indice-container h2 { margin-bottom:10px; color:#2c3e50; text-align:center; }
-#indiceEquipamentos { list-style:none; display:flex; flex-wrap:wrap; gap:10px 15px; justify-content:center; transition: all 0.3s ease; }
-#indiceEquipamentos li { margin:5px 0; }
+/* Índice responsivo - UMA LINHA POR EQUIPAMENTO */
+.indice-container { 
+    background:#ecf0f1; 
+    padding:20px; 
+    margin:0; 
+    border-bottom:2px solid #bdc3c7; 
+    transition: all 0.3s ease; 
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.indice-container h2 { 
+    margin-bottom:20px; 
+    color:#2c3e50; 
+    text-align:center; 
+    font-size: 1.5rem;
+}
+
+#indiceEquipamentos { 
+    list-style:none; 
+    display:flex; 
+    flex-direction: column;
+    gap: 12px;
+    justify-content:flex-start;
+    transition: all 0.3s ease; 
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#indiceEquipamentos li { 
+    margin:0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 #indiceEquipamentos li a { 
     background:#3498db; 
     color:white; 
-    padding:8px 14px; 
+    padding:12px 20px; 
     border-radius:8px; 
     text-decoration:none; 
-    font-size:.95rem; 
-    transition:.3s ease; 
+    font-size:1rem; 
+    transition:all 0.3s ease; 
     display:flex; 
     align-items:center; 
     justify-content:center; 
-    min-width:300px; 
     text-align:center; 
     cursor: pointer;
+    width: 100%;
+    max-width: 500px;
+    min-height: 50px;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
-#indiceEquipamentos li a:hover { background:#2978b8; }
-#indiceEquipamentos li a.active { background:#e74c3c; }
-#indiceEquipamentos a.reserva { background: #e67e22; }
-#indiceEquipamentos a.reserva:hover { background: #d35400; }
+
+#indiceEquipamentos li a:hover { 
+    background:#2978b8; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+#indiceEquipamentos li a.active { 
+    background:#e74c3c; 
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+#indiceEquipamentos a.reserva { 
+    background: #e67e22; 
+}
+#indiceEquipamentos a.reserva:hover { 
+    background: #d35400; 
+}
+
+/* Indicador de scroll para índice */
+.indice-scroll-indicator {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+}
 
 html { scroll-behavior:smooth; }
 
@@ -259,7 +320,25 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     .filtros { grid-template-columns: 1fr; gap:10px; }
     .botoes-filtro { flex-direction: column; align-items: center; }
     #btnLimparFiltros { width: 100%; max-width: 300px; justify-content: center; }
-    #indiceEquipamentos li a { min-width:90px; font-size:.85rem; padding:6px 10px; }
+    
+    /* Índice responsivo para mobile */
+    #indiceEquipamentos { 
+        padding: 0 5px;
+        gap: 8px;
+    }
+    
+    #indiceEquipamentos li a { 
+        padding:10px 15px; 
+        font-size:0.9rem; 
+        max-width: 100%;
+        min-height: 45px;
+    }
+    
+    .indice-container h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
     .equipamentos-container { grid-template-columns:1fr; }
     main { padding:20px; }
     .info-item { flex-direction:column; align-items:center; text-align:center; gap:5px; }
@@ -293,6 +372,26 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
         margin-bottom: 15px;
     }
 }
+
+@media(max-width:480px){
+    #indiceEquipamentos li a { 
+        padding:8px 12px; 
+        font-size:0.85rem; 
+        min-height: 40px;
+        border-radius: 6px;
+    }
+    
+    .indice-container h2 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Para telas muito grandes */
+@media(min-width:1200px){
+    #indiceEquipamentos li a { 
+        max-width: 600px;
+    }
+}
 </style>
 </head>
 <body>
@@ -322,6 +421,9 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
         <nav class="indice-container" id="topo-indice">
             <h2>Índice de Equipamentos</h2>
             <ul id="indiceEquipamentos"></ul>
+            <div class="indice-scroll-indicator" id="indiceScrollIndicator">
+                <i class="fas fa-arrow-down"></i> Role para ver mais equipamentos
+            </div>
         </nav>
 
         <main>
@@ -422,8 +524,24 @@ function inicializarSistema(equipamentos) {
 
         if (document.querySelector('.tela-principal').style.display !== 'none') {
             atualizarIndiceAtivo();
+            verificarScrollIndice();
         }
     });
+    
+    // Mostrar indicador de scroll se houver muitos itens
+    function verificarScrollIndice() {
+        const indiceContainer = document.getElementById('indiceEquipamentos');
+        const indicador = document.getElementById('indiceScrollIndicator');
+        
+        if (indiceContainer.scrollHeight > indiceContainer.clientHeight) {
+            indicador.style.display = 'block';
+        } else {
+            indicador.style.display = 'none';
+        }
+    }
+    
+    // Verificar inicialmente
+    setTimeout(verificarScrollIndice, 100);
 }
 
 function mostrarTelaPrincipal() {
@@ -710,7 +828,11 @@ function atualizarIndiceAtivo(){
     links.forEach(l => l.classList.remove('active'));
     if(indexAtivo !== null){
         const tagID = cards[indexAtivo].id;
-        const linkAtivo = document.querySelector(`#indiceEquipamentos a[href="#${tagID}"]`);
+        // Encontrar o link correspondente pelo texto da TAG
+        const linkAtivo = Array.from(links).find(link => {
+            const tagText = link.textContent;
+            return tagID.includes(tagText.replace(/[^a-zA-Z0-9]/g, ''));
+        });
         if(linkAtivo) linkAtivo.classList.add('active');
     }
 }
