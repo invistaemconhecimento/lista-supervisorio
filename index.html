@@ -10,6 +10,10 @@
 body { font-family:'Segoe UI', Tahoma, Geneva, Verdana,sans-serif; background:linear-gradient(135deg,#f5f7fa,#c3cfe2); min-height:100vh; padding:20px; }
 .container { max-width:1200px; margin:0 auto; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); overflow:hidden; }
 
+/* Tela principal */
+.tela-principal { display:block; }
+.tela-detalhes { display:none; }
+
 header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; padding:30px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:15px; }
 header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:0; flex-wrap:wrap; }
 header h1 img { max-height:50px; border-radius:5px; }
@@ -80,6 +84,7 @@ main { padding:30px; text-align:center; }
     box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; 
     transition:transform 0.3s ease, box-shadow 0.3s ease, all 0.3s ease; 
     display:flex; flex-direction:column; align-items:center; text-align:center;
+    cursor: pointer;
 }
 .equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
 .equipamento-card.reserva { border-left-color: #e67e22; background: #fff8f0; }
@@ -91,6 +96,108 @@ main { padding:30px; text-align:center; }
 .info-item { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; }
 .info-label { font-weight:600; color:#2c3e50; display:flex; align-items:center; gap:8px; }
 .info-value { color:#34495e; flex:1; text-align:center; }
+
+/* Tela de detalhes */
+.detalhes-header {
+    background:linear-gradient(135deg,#2c3e50,#4a6491);
+    color:white;
+    padding:30px;
+    text-align:center;
+    position: relative;
+}
+
+#btnVoltar {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+#btnVoltar:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.detalhes-header h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.detalhes-container {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.equipamento-detalhes {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px;
+    text-align: left;
+}
+
+.detalhe-item {
+    display: flex;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    align-items: flex-start;
+}
+
+.detalhe-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.detalhe-icon {
+    background: #3498db;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.detalhe-content {
+    flex: 1;
+}
+
+.detalhe-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.detalhe-value {
+    color: #34495e;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.detalhe-item.reserva .detalhe-icon {
+    background: #e67e22;
+}
 
 #btnFlutuanteTopo {
     position:fixed;
@@ -132,6 +239,7 @@ main { padding:30px; text-align:center; }
     justify-content:center; 
     min-width:300px; 
     text-align:center; 
+    cursor: pointer;
 }
 #indiceEquipamentos li a:hover { background:#2978b8; }
 #indiceEquipamentos li a.active { background:#e74c3c; }
@@ -155,91 +263,292 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     .equipamentos-container { grid-template-columns:1fr; }
     main { padding:20px; }
     .info-item { flex-direction:column; align-items:center; text-align:center; gap:5px; }
+    
+    .detalhes-header { padding: 20px; }
+    #btnVoltar {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        margin-bottom: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+    .detalhes-header h2 {
+        font-size: 1.5rem;
+    }
+    .detalhes-container {
+        padding: 20px;
+    }
+    .equipamento-detalhes {
+        padding: 20px;
+    }
+    .detalhe-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .detalhe-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
 }
 </style>
 </head>
 <body>
 <div class="container">
-    <header>
-        <h1><img src="logoERO.png" alt="Logo ERO"> Guia de Equipamentos</h1>
-        <div class="filtros-container">
-            <div class="filtros">
-                <input type="text" id="searchInput" placeholder="Buscar por TAG, local, categoria, origem ou destino...">
-                <select id="filterCategory"><option value="">Todas as Categorias</option></select>
-                <select id="filterLocal"><option value="">Todos os Locais</option></select>
-                <select id="filterTela"><option value="">Todas as Telas</option></select>
-                <select id="filterOrigem"><option value="">Todas as Origens</option></select>
-                <select id="filterSaida"><option value="">Todas os Destinos</option></select>
+    <!-- Tela Principal -->
+    <div class="tela-principal">
+        <header>
+            <h1><img src="logoERO.png" alt="Logo ERO"> Guia de Equipamentos</h1>
+            <div class="filtros-container">
+                <div class="filtros">
+                    <input type="text" id="searchInput" placeholder="Buscar por TAG, local, categoria, origem ou destino...">
+                    <select id="filterCategory"><option value="">Todas as Categorias</option></select>
+                    <select id="filterLocal"><option value="">Todos os Locais</option></select>
+                    <select id="filterTela"><option value="">Todas as Telas</option></select>
+                    <select id="filterOrigem"><option value="">Todas as Origens</option></select>
+                    <select id="filterSaida"><option value="">Todas os Destinos</option></select>
+                </div>
+                <div class="botoes-filtro">
+                    <button id="btnLimparFiltros">
+                        <i class="fas fa-times-circle"></i> Limpar Filtros
+                    </button>
+                </div>
             </div>
-            <div class="botoes-filtro">
-                <button id="btnLimparFiltros">
-                    <i class="fas fa-times-circle"></i> Limpar Filtros
-                </button>
+            <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
+        </header>
+
+        <nav class="indice-container" id="topo-indice">
+            <h2>Índice de Equipamentos</h2>
+            <ul id="indiceEquipamentos"></ul>
+        </nav>
+
+        <main>
+            <div class="equipamentos-container" id="equipamentosContainer"></div>
+        </main>
+
+        <footer>
+            <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</p>
+            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
+        </footer>
+    </div>
+
+    <!-- Tela de Detalhes -->
+    <div class="tela-detalhes">
+        <header class="detalhes-header">
+            <button id="btnVoltar">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <h2 id="detalhesTitulo">Detalhes do Equipamento</h2>
+        </header>
+
+        <main>
+            <div class="detalhes-container">
+                <div class="equipamento-detalhes" id="equipamentoDetalhes">
+                    <!-- Detalhes serão carregados aqui -->
+                </div>
             </div>
-        </div>
-        <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
-    </header>
+        </main>
 
-    <nav class="indice-container" id="topo-indice">
-        <h2>Índice de Equipamentos</h2>
-        <ul id="indiceEquipamentos"></ul>
-    </nav>
-
-    <main>
-        <div class="equipamentos-container" id="equipamentosContainer"></div>
-    </main>
-
-    <footer>
-        <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</p>
-        <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
-    </footer>
+        <footer>
+            <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</p>
+            <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear2"></span></p>
+        </footer>
+    </div>
 </div>
 
 <button id="btnFlutuanteTopo" title="Voltar ao índice"><i class="fas fa-arrow-up"></i></button>
 
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
+    document.getElementById('currentYear').textContent = currentYear;
+    document.getElementById('currentYear2').textContent = currentYear;
 
     let equipamentos = [];
+    let equipamentoAtual = null;
 
     try {
         const response = await fetch('lista.json');
         equipamentos = await response.json();
 
-        atualizarIndice(equipamentos);
-        preencherFiltros(equipamentos);
-        exibirEquipamentos(equipamentos);
-
-        // Adicionar evento para o botão de limpar filtros
-        document.getElementById('btnLimparFiltros').addEventListener('click', () => {
-            limparFiltros(equipamentos);
-        });
-
-        document.getElementById('searchInput').addEventListener('input', () => filtrar(equipamentos));
-        document.getElementById('filterCategory').addEventListener('change', () => filtrar(equipamentos));
-        document.getElementById('filterLocal').addEventListener('change', () => filtrar(equipamentos));
-        document.getElementById('filterTela').addEventListener('change', () => filtrar(equipamentos));
-        document.getElementById('filterOrigem').addEventListener('change', () => filtrar(equipamentos));
-        document.getElementById('filterSaida').addEventListener('change', () => filtrar(equipamentos));
-
-        const botaoTopo = document.getElementById("btnFlutuanteTopo");
-        botaoTopo.addEventListener("click", () => {
-            document.getElementById('topo-indice').scrollIntoView({behavior:'smooth'});
-        });
-
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 200){ botaoTopo.classList.add('show'); } 
-            else { botaoTopo.classList.remove('show'); }
-
-            atualizarIndiceAtivo();
-        });
+        inicializarSistema(equipamentos);
 
     } catch (err) {
         console.error("Erro ao carregar JSON:", err);
         document.getElementById('equipamentosContainer').innerHTML = '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
     }
 });
+
+function inicializarSistema(equipamentos) {
+    atualizarIndice(equipamentos);
+    preencherFiltros(equipamentos);
+    exibirEquipamentos(equipamentos);
+
+    // Adicionar evento para o botão de limpar filtros
+    document.getElementById('btnLimparFiltros').addEventListener('click', () => {
+        limparFiltros(equipamentos);
+    });
+
+    // Adicionar evento para o botão de voltar
+    document.getElementById('btnVoltar').addEventListener('click', () => {
+        mostrarTelaPrincipal();
+    });
+
+    // Adicionar eventos para filtros
+    document.getElementById('searchInput').addEventListener('input', () => filtrar(equipamentos));
+    document.getElementById('filterCategory').addEventListener('change', () => filtrar(equipamentos));
+    document.getElementById('filterLocal').addEventListener('change', () => filtrar(equipamentos));
+    document.getElementById('filterTela').addEventListener('change', () => filtrar(equipamentos));
+    document.getElementById('filterOrigem').addEventListener('change', () => filtrar(equipamentos));
+    document.getElementById('filterSaida').addEventListener('change', () => filtrar(equipamentos));
+
+    const botaoTopo = document.getElementById("btnFlutuanteTopo");
+    botaoTopo.addEventListener("click", () => {
+        if (document.querySelector('.tela-principal').style.display !== 'none') {
+            document.getElementById('topo-indice').scrollIntoView({behavior:'smooth'});
+        } else {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 200){ 
+            botaoTopo.classList.add('show'); 
+        } else { 
+            botaoTopo.classList.remove('show'); 
+        }
+
+        if (document.querySelector('.tela-principal').style.display !== 'none') {
+            atualizarIndiceAtivo();
+        }
+    });
+}
+
+function mostrarTelaPrincipal() {
+    document.querySelector('.tela-principal').style.display = 'block';
+    document.querySelector('.tela-detalhes').style.display = 'none';
+    document.getElementById('btnFlutuanteTopo').classList.remove('show');
+}
+
+function mostrarTelaDetalhes(equipamento) {
+    document.querySelector('.tela-principal').style.display = 'none';
+    document.querySelector('.tela-detalhes').style.display = 'block';
+    
+    // Atualizar título
+    document.getElementById('detalhesTitulo').textContent = `Detalhes - ${equipamento.tag}`;
+    
+    // Carregar detalhes do equipamento
+    carregarDetalhesEquipamento(equipamento);
+    
+    // Scroll para o topo
+    window.scrollTo({top: 0, behavior: 'instant'});
+}
+
+function carregarDetalhesEquipamento(equipamento) {
+    const container = document.getElementById('equipamentoDetalhes');
+    const descricao = equipamento['descrição'] || equipamento.descricao || '-';
+    const saida = equipamento['destino'] || equipamento.saida || '-';
+    const origem = equipamento.origem || '-';
+    
+    const icons = {
+        tag: 'fas fa-hashtag',
+        local: 'fas fa-map-marker-alt',
+        categoria: 'fas fa-cog',
+        tela: 'fas fa-tv',
+        origem: 'fas fa-arrow-right',
+        destino: 'fas fa-arrow-left',
+        descricao: 'fas fa-info-circle',
+        id: 'fas fa-id-card'
+    };
+    
+    const isReserva = String(equipamento.tag).endsWith('R');
+    
+    let html = `
+        <div class="detalhe-item ${isReserva ? 'reserva' : ''}">
+            <div class="detalhe-icon">
+                <i class="${icons.id}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">ID</span>
+                <span class="detalhe-value">${equipamento.id || '-'}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item ${isReserva ? 'reserva' : ''}">
+            <div class="detalhe-icon">
+                <i class="${icons.tag}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">TAG</span>
+                <span class="detalhe-value">${equipamento.tag || '-'} ${isReserva ? '<span style="color:#e67e22; font-weight:bold;">(Reserva)</span>' : ''}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.local}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Local</span>
+                <span class="detalhe-value">${equipamento.local || '-'}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.categoria}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Categoria</span>
+                <span class="detalhe-value">${equipamento.categoria || '-'}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.descricao}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Descrição</span>
+                <span class="detalhe-value">${descricao}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.tela}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Tela</span>
+                <span class="detalhe-value">${equipamento.tela || '-'}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.origem}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Origem</span>
+                <span class="detalhe-value">${origem}</span>
+            </div>
+        </div>
+        
+        <div class="detalhe-item">
+            <div class="detalhe-icon">
+                <i class="${icons.destino}"></i>
+            </div>
+            <div class="detalhe-content">
+                <span class="detalhe-label">Destino</span>
+                <span class="detalhe-value">${saida}</span>
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = html;
+}
 
 function limparFiltros(equipamentos) {
     // Limpar todos os campos de filtro
@@ -299,9 +608,16 @@ function atualizarIndice(equipamentos){
     const indice = document.getElementById('indiceEquipamentos');
     indice.innerHTML = '';
     equipamentos.forEach(e => {
-        const tagID = `equip-${e.tag.replace(/[^a-zA-Z0-9]/g,'')}`;
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#${tagID}" class="${String(e.tag).endsWith('R') ? 'reserva' : ''}">${e.tag}</a>`;
+        const link = document.createElement('a');
+        link.href = '#';
+        link.className = String(e.tag).endsWith('R') ? 'reserva' : '';
+        link.textContent = e.tag;
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            mostrarTelaDetalhes(e);
+        });
+        li.appendChild(link);
         indice.appendChild(li);
     });
 }
@@ -317,7 +633,13 @@ function exibirEquipamentos(equipamentos){
     if(equipamentos.length === 0){ 
         container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; 
     } else {
-        equipamentos.forEach(e => container.appendChild(criarCard(e)));
+        equipamentos.forEach(e => {
+            const card = criarCard(e);
+            card.addEventListener('click', () => {
+                mostrarTelaDetalhes(e);
+            });
+            container.appendChild(card);
+        });
     }
     atualizarContagem(equipamentos);
 }
@@ -328,7 +650,6 @@ function criarCard(e){
     if(String(e.tag).endsWith('R')) card.classList.add('reserva');
     card.id = `equip-${String(e.tag).replace(/[^a-zA-Z0-9]/g,'')}`;
     const icons = {local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', origem:'fas fa-arrow-right', destino:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
-    // Use bracket notation for properties with accent
     const descricao = e['descrição'] || e.descricao || '-';
     const saida = e['destino'] || e.saida || '';
     card.innerHTML = `
@@ -340,6 +661,9 @@ function criarCard(e){
             <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela || '-'}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.origem}"></i> Origem:</span><span class="info-value">${e.origem || '-'}</span></div>
             <div class="info-item"><span class="info-label"><i class="${icons.destino}"></i> Destino:</span><span class="info-value">${saida || '-'}</span></div>
+        </div>
+        <div style="margin-top:15px; color:#3498db; font-size:0.9rem;">
+            <i class="fas fa-external-link-alt"></i> Clique para ver detalhes
         </div>
     `;
     return card;
