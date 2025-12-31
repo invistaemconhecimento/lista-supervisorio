@@ -14,15 +14,52 @@ header { background:linear-gradient(135deg,#2c3e50,#4a6491); color:white; paddin
 header h1 { font-size:2.5rem; display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:0; flex-wrap:wrap; }
 header h1 img { max-height:50px; border-radius:5px; }
 
+.filtros-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+}
+
 .filtros { 
     display:grid; 
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
     gap:15px; 
     max-width:100%; 
     width:100%;
-    margin:0 auto 10px; 
+    margin:0 auto; 
     transition: all 0.3s ease;
 }
+
+.botoes-filtro {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+#btnLimparFiltros {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+#btnLimparFiltros:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
 #searchInput, #filterCategory, #filterLocal, #filterTela, #filterOrigem, #filterSaida {
     padding:12px 20px; 
     border:none; 
@@ -112,6 +149,8 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     header h1 { font-size:1.8rem; gap:10px; flex-direction:column; }
     header h1 img { max-height:40px; border-radius:5px; }
     .filtros { grid-template-columns: 1fr; gap:10px; }
+    .botoes-filtro { flex-direction: column; align-items: center; }
+    #btnLimparFiltros { width: 100%; max-width: 300px; justify-content: center; }
     #indiceEquipamentos li a { min-width:90px; font-size:.85rem; padding:6px 10px; }
     .equipamentos-container { grid-template-columns:1fr; }
     main { padding:20px; }
@@ -123,13 +162,20 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
 <div class="container">
     <header>
         <h1><img src="logoERO.png" alt="Logo ERO"> Guia de Equipamentos</h1>
-        <div class="filtros">
-            <input type="text" id="searchInput" placeholder="Buscar por TAG, local, categoria, origem ou destino...">
-            <select id="filterCategory"><option value="">Todas as Categorias</option></select>
-            <select id="filterLocal"><option value="">Todos os Locais</option></select>
-            <select id="filterTela"><option value="">Todas as Telas</option></select>
-            <select id="filterOrigem"><option value="">Todas as Origens</option></select>
-            <select id="filterSaida"><option value="">Todas os Destinos</option></select>
+        <div class="filtros-container">
+            <div class="filtros">
+                <input type="text" id="searchInput" placeholder="Buscar por TAG, local, categoria, origem ou destino...">
+                <select id="filterCategory"><option value="">Todas as Categorias</option></select>
+                <select id="filterLocal"><option value="">Todos os Locais</option></select>
+                <select id="filterTela"><option value="">Todas as Telas</option></select>
+                <select id="filterOrigem"><option value="">Todas as Origens</option></select>
+                <select id="filterSaida"><option value="">Todas os Destinos</option></select>
+            </div>
+            <div class="botoes-filtro">
+                <button id="btnLimparFiltros">
+                    <i class="fas fa-times-circle"></i> Limpar Filtros
+                </button>
+            </div>
         </div>
         <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
     </header>
@@ -144,7 +190,7 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     </main>
 
     <footer>
-        <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</span></p>
+        <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</p>
         <p>Sistema de Controle de Equipamentos &copy; <span id="currentYear"></span></p>
     </footer>
 </div>
@@ -155,13 +201,20 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+    let equipamentos = [];
+
     try {
         const response = await fetch('lista.json');
-        const equipamentos = await response.json();
+        equipamentos = await response.json();
 
         atualizarIndice(equipamentos);
         preencherFiltros(equipamentos);
         exibirEquipamentos(equipamentos);
+
+        // Adicionar evento para o botão de limpar filtros
+        document.getElementById('btnLimparFiltros').addEventListener('click', () => {
+            limparFiltros(equipamentos);
+        });
 
         document.getElementById('searchInput').addEventListener('input', () => filtrar(equipamentos));
         document.getElementById('filterCategory').addEventListener('change', () => filtrar(equipamentos));
@@ -188,12 +241,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function limparFiltros(equipamentos) {
+    // Limpar todos os campos de filtro
+    document.getElementById('searchInput').value = '';
+    document.getElementById('filterCategory').value = '';
+    document.getElementById('filterLocal').value = '';
+    document.getElementById('filterTela').value = '';
+    document.getElementById('filterOrigem').value = '';
+    document.getElementById('filterSaida').value = '';
+    
+    // Restaurar a exibição de todos os equipamentos
+    atualizarIndice(equipamentos);
+    exibirEquipamentos(equipamentos);
+}
+
 function preencherFiltros(equipamentos){
     const selectCategoria = document.getElementById('filterCategory');
     const selectLocal = document.getElementById('filterLocal');
     const selectTela = document.getElementById('filterTela');
     const selectOrigem = document.getElementById('filterOrigem');
     const selectSaida = document.getElementById('filterSaida');
+
+    // Limpar opções existentes (exceto a primeira)
+    [selectCategoria, selectLocal, selectTela, selectOrigem, selectSaida].forEach(select => {
+        while(select.options.length > 1) {
+            select.remove(1);
+        }
+    });
 
     // categorias
     [...new Set(equipamentos.map(e => (e.categoria || '').trim()))].filter(Boolean).sort().forEach(c => {
@@ -210,7 +284,7 @@ function preencherFiltros(equipamentos){
         const option = document.createElement('option'); option.value=t; option.textContent=t; selectTela.appendChild(option);
     });
 
-    // origems
+    // origens
     [...new Set(equipamentos.map(e => ((e.origem || '') + '').trim()))].filter(Boolean).sort().forEach(en => {
         const option = document.createElement('option'); option.value=en; option.textContent=en; selectOrigem.appendChild(option);
     });
