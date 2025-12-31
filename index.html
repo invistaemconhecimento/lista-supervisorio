@@ -73,29 +73,27 @@ header h1 img { max-height:50px; border-radius:5px; }
     width:100%;
 }
 
-.stats { font-size:1.1rem; opacity:0.9; margin-top:5px; text-align:center; transition: all 0.3s ease; }
-
-main { padding:30px; text-align:center; }
-
-.equipamentos-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:25px; transition: all 0.3s ease; }
-
-.equipamento-card { 
-    background:white; border-radius:10px; padding:25px; 
-    box-shadow:0 5px 15px rgba(0,0,0,0.08); border-left:5px solid #3498db; 
-    transition:transform 0.3s ease, box-shadow 0.3s ease, all 0.3s ease; 
-    display:flex; flex-direction:column; align-items:center; text-align:center;
-    cursor: pointer;
+.stats { 
+    font-size:1.1rem; 
+    opacity:0.9; 
+    margin-top:5px; 
+    text-align:center; 
+    transition: all 0.3s ease; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
-.equipamento-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
-.equipamento-card.reserva { border-left-color: #e67e22; background: #fff8f0; }
 
-.equipamento-header { display:flex; justify-content:center; align-items:center; margin-bottom:15px; width:100%; }
-.tag { background:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; font-size:0.9rem; }
-
-.equipamento-info { margin-top:15px; flex:1; display:flex; flex-direction:column; gap:12px; align-items:center; }
-.info-item { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; }
-.info-label { font-weight:600; color:#2c3e50; display:flex; align-items:center; gap:8px; }
-.info-value { color:#34495e; flex:1; text-align:center; }
+.stats-badge {
+    background: #3498db;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
 
 /* Tela de detalhes */
 .detalhes-header {
@@ -225,19 +223,34 @@ main { padding:30px; text-align:center; }
 /* Índice responsivo - UMA LINHA POR EQUIPAMENTO */
 .indice-container { 
     background:#ecf0f1; 
-    padding:20px; 
+    padding:30px 20px; 
     margin:0; 
-    border-bottom:2px solid #bdc3c7; 
     transition: all 0.3s ease; 
     width: 100%;
     overflow-x: hidden;
+    border-bottom: 2px solid #bdc3c7;
 }
 
-.indice-container h2 { 
-    margin-bottom:20px; 
+.indice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.indice-header h2 { 
     color:#2c3e50; 
-    text-align:center; 
     font-size: 1.5rem;
+    margin: 0;
+}
+
+.indice-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 #indiceEquipamentos { 
@@ -309,10 +322,44 @@ main { padding:30px; text-align:center; }
 
 html { scroll-behavior:smooth; }
 
-footer { background:#2c3e50; color:white; text-align:center; padding:20px; margin-top:30px; }
+footer { 
+    background:#2c3e50; 
+    color:white; 
+    text-align:center; 
+    padding:20px; 
+    margin-top:0;
+}
 
-.no-results { grid-column:1/-1; text-align:center; padding:40px; color:#7f8c8d; font-size:1.2rem; }
-.error { grid-column:1/-1; text-align:center; padding:40px; color:#e74c3c; font-size:1.2rem; }
+.no-results { 
+    grid-column:1/-1; 
+    text-align:center; 
+    padding:40px; 
+    color:#7f8c8d; 
+    font-size:1.2rem; 
+}
+.error { 
+    grid-column:1/-1; 
+    text-align:center; 
+    padding:40px; 
+    color:#e74c3c; 
+    font-size:1.2rem; 
+}
+
+/* Mensagem após o índice */
+.indice-mensagem {
+    text-align: center;
+    padding: 30px 20px;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.indice-mensagem i {
+    color: #3498db;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
 
 @media(max-width:768px){
     header h1 { font-size:1.8rem; gap:10px; flex-direction:column; }
@@ -322,6 +369,12 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     #btnLimparFiltros { width: 100%; max-width: 300px; justify-content: center; }
     
     /* Índice responsivo para mobile */
+    .indice-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
     #indiceEquipamentos { 
         padding: 0 5px;
         gap: 8px;
@@ -338,10 +391,6 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
         font-size: 1.3rem;
         margin-bottom: 15px;
     }
-    
-    .equipamentos-container { grid-template-columns:1fr; }
-    main { padding:20px; }
-    .info-item { flex-direction:column; align-items:center; text-align:center; gap:5px; }
     
     .detalhes-header { padding: 20px; }
     #btnVoltar {
@@ -415,20 +464,31 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
                     </button>
                 </div>
             </div>
-            <div class="stats"><span id="totalEquipamentos">0 equipamentos</span></div>
+            <div class="stats">
+                <span id="totalEquipamentos">0 equipamentos</span>
+                <span class="stats-badge" id="reservasCount">0 reservas</span>
+                <span class="stats-badge" id="ativosCount">0 ativos</span>
+            </div>
         </header>
 
         <nav class="indice-container" id="topo-indice">
-            <h2>Índice de Equipamentos</h2>
+            <div class="indice-header">
+                <h2>Índice de Equipamentos</h2>
+                <div class="indice-info">
+                    <span id="indiceCount">0 itens</span>
+                </div>
+            </div>
             <ul id="indiceEquipamentos"></ul>
             <div class="indice-scroll-indicator" id="indiceScrollIndicator">
                 <i class="fas fa-arrow-down"></i> Role para ver mais equipamentos
             </div>
         </nav>
 
-        <main>
-            <div class="equipamentos-container" id="equipamentosContainer"></div>
-        </main>
+        <div class="indice-mensagem">
+            <i class="fas fa-mouse-pointer"></i>
+            <p>Clique em qualquer equipamento no índice acima para ver os detalhes completos.</p>
+            <p>Use os filtros no topo da página para encontrar equipamentos específicos.</p>
+        </div>
 
         <footer>
             <p>Desenvolvido por Alexandre Oliveira - +55 94 992327693</p>
@@ -440,7 +500,7 @@ footer { background:#2c3e50; color:white; text-align:center; padding:20px; margi
     <div class="tela-detalhes">
         <header class="detalhes-header">
             <button id="btnVoltar">
-                <i class="fas fa-arrow-left"></i> Voltar
+                <i class="fas fa-arrow-left"></i> Voltar ao Índice
             </button>
             <h2 id="detalhesTitulo">Detalhes do Equipamento</h2>
         </header>
@@ -469,7 +529,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('currentYear2').textContent = currentYear;
 
     let equipamentos = [];
-    let equipamentoAtual = null;
 
     try {
         const response = await fetch('lista.json');
@@ -479,14 +538,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (err) {
         console.error("Erro ao carregar JSON:", err);
-        document.getElementById('equipamentosContainer').innerHTML = '<div class="error">Erro ao carregar os dados dos equipamentos.</div>';
+        document.getElementById('indiceEquipamentos').innerHTML = '<li><div class="error">Erro ao carregar os dados dos equipamentos.</div></li>';
     }
 });
 
 function inicializarSistema(equipamentos) {
     atualizarIndice(equipamentos);
     preencherFiltros(equipamentos);
-    exibirEquipamentos(equipamentos);
+    atualizarEstatisticas(equipamentos);
 
     // Adicionar evento para o botão de limpar filtros
     document.getElementById('btnLimparFiltros').addEventListener('click', () => {
@@ -521,11 +580,6 @@ function inicializarSistema(equipamentos) {
         } else { 
             botaoTopo.classList.remove('show'); 
         }
-
-        if (document.querySelector('.tela-principal').style.display !== 'none') {
-            atualizarIndiceAtivo();
-            verificarScrollIndice();
-        }
     });
     
     // Mostrar indicador de scroll se houver muitos itens
@@ -542,6 +596,17 @@ function inicializarSistema(equipamentos) {
     
     // Verificar inicialmente
     setTimeout(verificarScrollIndice, 100);
+}
+
+function atualizarEstatisticas(equipamentos) {
+    const total = equipamentos.length;
+    const reservas = equipamentos.filter(e => String(e.tag).endsWith('R')).length;
+    const ativos = total - reservas;
+    
+    document.getElementById('totalEquipamentos').textContent = `${total} equipamentos`;
+    document.getElementById('reservasCount').textContent = `${reservas} reservas`;
+    document.getElementById('ativosCount').textContent = `${ativos} ativos`;
+    document.getElementById('indiceCount').textContent = `${total} itens`;
 }
 
 function mostrarTelaPrincipal() {
@@ -679,7 +744,7 @@ function limparFiltros(equipamentos) {
     
     // Restaurar a exibição de todos os equipamentos
     atualizarIndice(equipamentos);
-    exibirEquipamentos(equipamentos);
+    atualizarEstatisticas(equipamentos);
 }
 
 function preencherFiltros(equipamentos){
@@ -725,66 +790,24 @@ function preencherFiltros(equipamentos){
 function atualizarIndice(equipamentos){
     const indice = document.getElementById('indiceEquipamentos');
     indice.innerHTML = '';
-    equipamentos.forEach(e => {
-        const li = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = '#';
-        link.className = String(e.tag).endsWith('R') ? 'reserva' : '';
-        link.textContent = e.tag;
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            mostrarTelaDetalhes(e);
-        });
-        li.appendChild(link);
-        indice.appendChild(li);
-    });
-}
-
-function atualizarContagem(equipamentos){
-    const span = document.getElementById('totalEquipamentos');
-    span.textContent = `${equipamentos.length} equipamento${equipamentos.length !== 1 ? 's' : ''}`;
-}
-
-function exibirEquipamentos(equipamentos){
-    const container = document.getElementById('equipamentosContainer'); 
-    container.innerHTML='';
-    if(equipamentos.length === 0){ 
-        container.innerHTML='<div class="no-results">Nenhum equipamento encontrado.</div>'; 
+    
+    if (equipamentos.length === 0) {
+        indice.innerHTML = '<li><div class="no-results">Nenhum equipamento encontrado com os filtros aplicados.</div></li>';
     } else {
         equipamentos.forEach(e => {
-            const card = criarCard(e);
-            card.addEventListener('click', () => {
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = '#';
+            link.className = String(e.tag).endsWith('R') ? 'reserva' : '';
+            link.textContent = e.tag;
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
                 mostrarTelaDetalhes(e);
             });
-            container.appendChild(card);
+            li.appendChild(link);
+            indice.appendChild(li);
         });
     }
-    atualizarContagem(equipamentos);
-}
-
-function criarCard(e){
-    const card = document.createElement('div');
-    card.className = 'equipamento-card';
-    if(String(e.tag).endsWith('R')) card.classList.add('reserva');
-    card.id = `equip-${String(e.tag).replace(/[^a-zA-Z0-9]/g,'')}`;
-    const icons = {local:'fas fa-map-marker-alt', categoria:'fas fa-cog', tela:'fas fa-tv', origem:'fas fa-arrow-right', destino:'fas fa-arrow-left', descricao:'fas fa-info-circle'};
-    const descricao = e['descrição'] || e.descricao || '-';
-    const saida = e['destino'] || e.saida || '';
-    card.innerHTML = `
-        <div class="equipamento-header"><span class="tag">${e.tag}</span></div>
-        <div class="equipamento-info">
-            <div class="info-item"><span class="info-label"><i class="${icons.local}"></i> Local:</span><span class="info-value">${e.local || '-'}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.categoria}"></i> Categoria:</span><span class="info-value">${e.categoria || '-'}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.descricao}"></i> Descrição:</span><span class="info-value">${descricao}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.tela}"></i> Tela:</span><span class="info-value">${e.tela || '-'}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.origem}"></i> Origem:</span><span class="info-value">${e.origem || '-'}</span></div>
-            <div class="info-item"><span class="info-label"><i class="${icons.destino}"></i> Destino:</span><span class="info-value">${saida || '-'}</span></div>
-        </div>
-        <div style="margin-top:15px; color:#3498db; font-size:0.9rem;">
-            <i class="fas fa-external-link-alt"></i> Clique para ver detalhes
-        </div>
-    `;
-    return card;
 }
 
 function filtrar(equipamentos){
@@ -813,28 +836,8 @@ function filtrar(equipamentos){
             && (!saidaFiltro || ((e['destino'] || e.saida) === saidaFiltro));
     });
 
-    exibirEquipamentos(filtrados);
     atualizarIndice(filtrados);
-}
-
-function atualizarIndiceAtivo(){
-    const cards = document.querySelectorAll('.equipamento-card');
-    let indexAtivo = null;
-    cards.forEach((card,i) => {
-        const rect = card.getBoundingClientRect();
-        if(rect.top <= 150 && rect.bottom >= 150){ indexAtivo=i; }
-    });
-    const links = document.querySelectorAll('#indiceEquipamentos a');
-    links.forEach(l => l.classList.remove('active'));
-    if(indexAtivo !== null){
-        const tagID = cards[indexAtivo].id;
-        // Encontrar o link correspondente pelo texto da TAG
-        const linkAtivo = Array.from(links).find(link => {
-            const tagText = link.textContent;
-            return tagID.includes(tagText.replace(/[^a-zA-Z0-9]/g, ''));
-        });
-        if(linkAtivo) linkAtivo.classList.add('active');
-    }
+    atualizarEstatisticas(filtrados);
 }
 </script>
 </body>
